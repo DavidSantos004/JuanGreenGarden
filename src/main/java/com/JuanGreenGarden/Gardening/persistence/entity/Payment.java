@@ -9,6 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 
@@ -18,21 +20,24 @@ import lombok.Data;
 public class Payment {
     @EmbeddedId
     private Payment id;
-
-    @MapsId("customerNumber")
-    @ManyToOne
-    @JoinColumn(name = "codigo_cliente", referencedColumnName = "codigo_cliente")
-    private Customer customer;
-
+    
     @Column(name = "forma_pago", nullable = false)
     private String paymentMethod;
 
     @Column(name = "id_transaccion", nullable = false)
     private String transactionId;
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "fecha_pago", nullable = false)
     private Date paymentDate;
 
     @Column(name = "total", nullable = false)
     private double amount;
+
+    // Relationships
+
+    @MapsId("customerNumber")
+    @ManyToOne
+    @JoinColumn(name = "codigo_cliente", referencedColumnName = "codigo_cliente")
+    private Customer customerField2;
 }

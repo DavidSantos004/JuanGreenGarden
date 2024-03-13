@@ -1,11 +1,18 @@
 package com.JuanGreenGarden.Gardening.persistence.entity;
 
 import lombok.Data;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Data
@@ -31,14 +38,24 @@ public class Employee {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @Column(name = "puesto")
+    private String jobTitle;
+    
+    // Relationships
+    
+    @JsonIgnore
+    @OneToMany(mappedBy = "employeeField", fetch = FetchType.EAGER)
+    private List<Customer> employees;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "employeeField2", fetch = FetchType.EAGER)
+    private List<Employee> employees2;
+
     @ManyToOne
     @JoinColumn(name = "codigo_oficina", nullable = false)
-    private Office office;
+    private Office officeField;
 
     @ManyToOne
     @JoinColumn(name = "codigo_jefe")
-    private Employee manager;
-
-    @Column(name = "puesto")
-    private String jobTitle;
+    private Employee employeeField2;
 }

@@ -1,8 +1,14 @@
 package com.JuanGreenGarden.Gardening.persistence.entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -23,4 +29,10 @@ public class ProductLine {
 
     @Column(name = "imagen")
     private String image;
+
+    // Relationships
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "productLineField", fetch = FetchType.EAGER)
+    private List<Product> productLines;
 }
