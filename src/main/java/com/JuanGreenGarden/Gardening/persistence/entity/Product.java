@@ -1,10 +1,16 @@
 package com.JuanGreenGarden.Gardening.persistence.entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -19,10 +25,6 @@ public class Product {
 
     @Column(name = "nombre", nullable = false)
     private String productName;
-
-    @ManyToOne
-    @JoinColumn(name = "gama", nullable = false)
-    private ProductLine productLine;
 
     @Column(name = "dimensiones")
     private String productScale;
@@ -41,4 +43,16 @@ public class Product {
 
     @Column(name = "precio_proveedor")
     private double MSRP;
+
+    // Relationships
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "gama", nullable = false)
+    private ProductLine productLineField;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "productField", fetch = FetchType.EAGER)
+    private List<OrderDetail> products;
+
 }

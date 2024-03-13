@@ -17,15 +17,6 @@ public class OrderDetail {
     @EmbeddedId
     private OrderDetail id;
 
-    @MapsId("orderNumber")
-    @ManyToOne
-    @JoinColumn(name = "codigo_pedido", referencedColumnName = "codigo_pedido")
-    private Order order;
-
-    @ManyToOne
-    @JoinColumn(name = "codigo_producto", referencedColumnName = "codigo_producto")
-    private Product product;
-
     @Column(name = "cantidad", nullable = false)
     private Integer quantityOrdered;
 
@@ -34,4 +25,16 @@ public class OrderDetail {
 
     @Column(name = "numero_linea", nullable = false)
     private Integer orderLineNumber;
+
+    // Relationships
+
+    @MapsId("orderNumber")
+    @ManyToOne
+    @JoinColumn(name = "codigo_pedido", referencedColumnName = "codigo_pedido")
+    private Order orderField;
+
+    @ManyToOne
+    @JoinColumn(name = "codigo_producto", referencedColumnName = "codigo_producto")
+    private Product productField;
+
 }

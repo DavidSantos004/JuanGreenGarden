@@ -1,11 +1,18 @@
 package com.JuanGreenGarden.Gardening.persistence.entity;
 
 import lombok.Data;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Data
@@ -49,11 +56,24 @@ public class Customer {
     @Column(name = "codigo_postal")
     private String postalCode;
 
+    @Column(name = "limite_credito")
+    private double creditLimit;
+
+    // Relationships
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "customerField", fetch = FetchType.EAGER)
+    private List<Order> customers;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "customerField2", fetch = FetchType.EAGER)
+    private List<Payment> customers2;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "codigo_empleado_rep_ventas")
-    private Employee salesRepEmployee;
+    private Employee employeeField;
 
-    @Column(name = "limite_credito")
-    private Double creditLimit;
+    
 }
 
