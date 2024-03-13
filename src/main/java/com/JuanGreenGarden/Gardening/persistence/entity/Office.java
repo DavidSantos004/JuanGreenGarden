@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -18,28 +20,29 @@ import jakarta.persistence.Table;
 @Table(name = "oficina")
 public class Office {
     @Id
-    @Column(name = "codigo_oficina")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "codigo_oficina", length = 100)
     private String officeCode;
 
-    @Column(name = "ciudad", nullable = false)
+    @Column(name = "ciudad", length = 30, nullable = false)
     private String city;
 
-    @Column(name = "pais", nullable = false)
+    @Column(name = "pais", length = 50, nullable = false)
     private String country;
 
-    @Column(name = "region")
+    @Column(name = "region", length = 50)
     private String region;
 
-    @Column(name = "codigo_postal", nullable = false)
+    @Column(name = "codigo_postal", length = 50, nullable = false)
     private String postalCode;
 
-    @Column(name = "telefono", nullable = false)
+    @Column(name = "telefono", length = 20, nullable = false)
     private String phone;
 
-    @Column(name = "linea_direccion1", nullable = false)
+    @Column(name = "linea_direccion1", length = 50, nullable = false)
     private String addressLine1;
 
-    @Column(name = "linea_direccion2")
+    @Column(name = "linea_direccion2", length = 50)
     private String addressLine2;
 
     // Relationships
