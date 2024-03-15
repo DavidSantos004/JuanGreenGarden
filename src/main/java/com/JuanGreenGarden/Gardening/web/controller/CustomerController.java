@@ -3,6 +3,7 @@ package com.JuanGreenGarden.Gardening.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.JuanGreenGarden.Gardening.domain.Exceptions.DifferentDataTypeException;
+import com.JuanGreenGarden.Gardening.domain.Exceptions.InvalidIdFormatException;
+import com.JuanGreenGarden.Gardening.domain.Exceptions.NotFoundEndPoint;
 import com.JuanGreenGarden.Gardening.domain.service.CustomerService;
 import com.JuanGreenGarden.Gardening.persistence.entity.Customer;
 
@@ -37,29 +41,18 @@ public class CustomerController {
     }
 
     @GetMapping("/{customerId}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable Integer customerId) {
-        Customer customer = customerService.getCustomerById(customerId);
-        return customer != null ?
-                new ResponseEntity<>(customer, HttpStatus.OK) :
-                new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+    public ResponseEntity<Customer> getCustomerById(@PathVariable String customerId) {
+        try {
+            Integer id = Integer.parseInt(customerId);
+            Customer customer = customerService.getCustomerById(id);
+            if (customer != null) {
+                return new ResponseEntity<>(customer, HttpStatus.OK);
+            } else {
+                throw new NotFoundEndPoint("Customer with ID " + id + " not found");
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidIdFormatException("Invalid format for customer ID: " + customerId);
+        }
+}
 
-    @PostMapping
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        Customer createdCustomer = customerService.createOrUpdateCustomer(customer);
-        return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{customerId}")
-    public ResponseEntity<Customer> updateCustomer(@PathVariable Integer customerId, @RequestBody Customer customer) {
-        customer.setCustomerNumber(customerId);
-        Customer updatedCustomer = customerService.createOrUpdateCustomer(customer);
-        return new ResponseEntity<>(updatedCustomer, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{customerId}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable Integer customerId) {
-        customerService.deleteCustomer(customerId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 }

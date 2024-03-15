@@ -1,6 +1,7 @@
 package com.JuanGreenGarden.Gardening.web.controller;
 
 
+import com.JuanGreenGarden.Gardening.domain.Exceptions.NotFoundEndPoint;
 import com.JuanGreenGarden.Gardening.domain.service.ProductLineService;
 import com.JuanGreenGarden.Gardening.persistence.entity.ProductLine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,28 +30,13 @@ public class ProductLineController {
     @GetMapping("/{productLine}")
     public ResponseEntity<ProductLine> getProductLine(@PathVariable String productLine) {
         ProductLine productLineObj = productLineService.getProductLine(productLine);
-        return productLineObj != null ?
-                new ResponseEntity<>(productLineObj, HttpStatus.OK) :
-                new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if ( productLineObj != null){
+            return new ResponseEntity<>(productLineObj, HttpStatus.OK);
+        } else{
+            throw new NotFoundEndPoint("ProductLine Whit ID" + productLine + " Not found");
+        }
     }
 
-    @PostMapping
-    public ResponseEntity<ProductLine> createProductLine(@RequestBody ProductLine productLine) {
-        ProductLine createdProductLine = productLineService.createOrUpdateProductLine(productLine);
-        return new ResponseEntity<>(createdProductLine, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{productLine}")
-    public ResponseEntity<ProductLine> updateProductLine(@PathVariable String productLine, @RequestBody ProductLine productLineDetails) {
-        productLineDetails.setProductLine(productLine);
-        ProductLine updatedProductLine = productLineService.createOrUpdateProductLine(productLineDetails);
-        return new ResponseEntity<>(updatedProductLine, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{productLine}")
-    public ResponseEntity<Void> deleteProductLine(@PathVariable String productLine) {
-        productLineService.deleteProductLine(productLine);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+    
 }
 

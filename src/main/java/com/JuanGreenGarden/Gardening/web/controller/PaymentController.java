@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.JuanGreenGarden.Gardening.domain.Exceptions.DifferentDataTypeException;
+import com.JuanGreenGarden.Gardening.domain.Exceptions.NotFoundEndPoint;
 import com.JuanGreenGarden.Gardening.domain.service.PaymentService;
 import com.JuanGreenGarden.Gardening.persistence.entity.Payment;
 
@@ -36,29 +38,19 @@ public class PaymentController {
     }
 
     @GetMapping("/{paymentId}")
-    public ResponseEntity<Payment> getPaymentById(@PathVariable Integer paymentId) {
-        Payment payment = paymentService.getPaymentById(paymentId);
-        return payment != null ?
-                new ResponseEntity<>(payment, HttpStatus.OK) :
-                new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Payment> getPaymentById(@PathVariable String paymentId) {
+        try {
+            Integer id = Integer.parseInt(paymentId);
+            Payment payment = paymentService.getPaymentById(id);
+            
+            if (payment != null) {
+                return new ResponseEntity<>(payment, HttpStatus.OK);
+            } else {
+                throw new NotFoundEndPoint("Payment with ID " + id + " not found");
+            }
+        } catch (NumberFormatException e) {
+            throw new DifferentDataTypeException("Invalid ID format. Please provide a numeric value for paymentId.");
+        }
     }
 
-    @PostMapping
-    public ResponseEntity<Payment> createPayment(@RequestBody Payment payment) {
-        Payment createdPayment = paymentService.createOrUpdatePayment(payment);
-        return new ResponseEntity<>(createdPayment, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{paymentId}")
-    public ResponseEntity<Payment> updatePayment(@PathVariable Integer paymentId, @RequestBody Payment payment) {
-        payment.setCustomerNumber(paymentId);
-        Payment updatedPayment = paymentService.createOrUpdatePayment(payment);
-        return new ResponseEntity<>(updatedPayment, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{paymentId}")
-    public ResponseEntity<Void> deletePayment(@PathVariable Integer paymentId) {
-        paymentService.deletePayment(paymentId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 }

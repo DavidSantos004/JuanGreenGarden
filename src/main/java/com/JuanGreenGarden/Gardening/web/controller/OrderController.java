@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.JuanGreenGarden.Gardening.domain.Exceptions.InvalidIdFormatException;
+import com.JuanGreenGarden.Gardening.domain.Exceptions.NotFoundEndPoint;
 import com.JuanGreenGarden.Gardening.domain.service.OrderService;
 import com.JuanGreenGarden.Gardening.persistence.entity.Order;
 
@@ -35,29 +37,19 @@ public class OrderController {
     }
 
     @GetMapping("/{orderId}")
-    public ResponseEntity<Order> getOrderById(@PathVariable Integer orderId) {
-        Order order = orderService.getOrderById(orderId);
-        return order != null ?
-                new ResponseEntity<>(order, HttpStatus.OK) :
-                new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Order> getOrderById(@PathVariable String orderId) {
+        try {
+            Integer id = Integer.parseInt(orderId);
+            Order order = orderService.getOrderById(id);
+            if (order != null){
+                return new ResponseEntity<>(order, HttpStatus.OK);
+            } else {
+                throw new NotFoundEndPoint("Order with ID " + id + " not found");
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidIdFormatException("Invalid format for order ID: " + orderId);
+        }
     }
 
-    @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestBody Order order) {
-        Order createdOrder = orderService.createOrUpdateOrder(order);
-        return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
-    }
 
-    @PutMapping("/{orderId}")
-    public ResponseEntity<Order> updateOrder(@PathVariable Integer orderId, @RequestBody Order order) {
-        order.setOrderNumber(orderId);
-        Order updatedOrder = orderService.createOrUpdateOrder(order);
-        return new ResponseEntity<>(updatedOrder, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{orderId}")
-    public ResponseEntity<Void> deleteOrder(@PathVariable Integer orderId) {
-        orderService.deleteOrder(orderId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 }

@@ -4,7 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+@RestControllerAdvice
 public class GlobalExceptionHandler {
     
     @ExceptionHandler(DifferentDataTypeException.class)
@@ -27,4 +29,6 @@ public class GlobalExceptionHandler {
         ErrorResponses errorResponse = new ErrorResponses("That endpoint doesn't exist", ex1.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
+
+
 }

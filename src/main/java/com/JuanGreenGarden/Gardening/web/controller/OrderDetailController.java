@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.JuanGreenGarden.Gardening.domain.Exceptions.DifferentDataTypeException;
+import com.JuanGreenGarden.Gardening.domain.Exceptions.NotFoundEndPoint;
 import com.JuanGreenGarden.Gardening.domain.service.OrderDetailService;
 import com.JuanGreenGarden.Gardening.persistence.entity.OrderDetail;
 import com.JuanGreenGarden.Gardening.persistence.entity.OrderDetailId;
@@ -35,32 +37,24 @@ public class OrderDetailController {
     }
 
     @GetMapping("/{orderNumber}/{orderLineNumber}")
-    public ResponseEntity<OrderDetail> getOrderDetail(@PathVariable Integer orderNumber, @PathVariable Integer orderLineNumber) {
-        OrderDetailId orderDetailId = new OrderDetailId(orderNumber, orderLineNumber);
-        OrderDetail orderDetail = orderDetailService.getOrderDetail(orderDetailId);
-        return orderDetail != null ?
-                new ResponseEntity<>(orderDetail, HttpStatus.OK) :
-                new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+    public ResponseEntity<OrderDetail> getOrderDetail(@PathVariable String orderNumber, @PathVariable String orderLineNumber) {
+        try {
+            Integer number = Integer.parseInt(orderNumber);
+            Integer lineNumber = Integer.parseInt(orderLineNumber);
 
-    @PostMapping
-    public ResponseEntity<OrderDetail> createOrderDetail(@RequestBody OrderDetail orderDetail) {
-        OrderDetail createdOrderDetail = orderDetailService.createOrUpdateOrderDetail(orderDetail);
-        return new ResponseEntity<>(createdOrderDetail, HttpStatus.CREATED);
-    }
+            // Si ambos números son enteros válidos, procedemos a buscar el detalle de la orden
+            OrderDetailId orderDetailId = new OrderDetailId(number, lineNumber);
+            OrderDetail orderDetail = orderDetailService.getOrderDetail(orderDetailId);
+            
+            if (orderDetail != null) {
+                return new ResponseEntity<>(orderDetail, HttpStatus.OK);
+            } else {
+                throw new NotFoundEndPoint("OrderDetail with ID " + orderDetailId + " not found");
+            }
+        } catch (NumberFormatException e) {
+            // Si alguno de los valores no es un número válido, lanzamos una excepción de tipo BadRequest
+            throw new DifferentDataTypeException("Invalid ID format. Please provide numeric values for orderNumber and orderLineNumber.");
+        }
+}
 
-    @PutMapping("/{orderNumber}/{orderLineNumber}")
-    public ResponseEntity<OrderDetail> updateOrderDetail(@PathVariable Integer orderNumber, @PathVariable Integer orderLineNumber, @RequestBody OrderDetail orderDetail) {
-        OrderDetailId orderDetailId = new OrderDetailId(orderNumber, orderLineNumber);
-        orderDetail.setOrderDetailId(orderDetailId);
-        OrderDetail updatedOrderDetail = orderDetailService.createOrUpdateOrderDetail(orderDetail);
-        return new ResponseEntity<>(updatedOrderDetail, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{orderNumber}/{orderLineNumber}")
-    public ResponseEntity<Void> deleteOrderDetail(@PathVariable Integer orderNumber, @PathVariable Integer orderLineNumber) {
-        OrderDetailId orderDetailId = new OrderDetailId(orderNumber, orderLineNumber);
-        orderDetailService.deleteOrderDetail(orderDetailId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 }

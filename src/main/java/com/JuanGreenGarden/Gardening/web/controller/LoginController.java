@@ -16,7 +16,7 @@ public class LoginController {
 
     @PostMapping("login")
     public UserProject login(
-            @RequestParam("user") String username,
+            @RequestParam("newUser") String username,
             @RequestParam("encryptedPass") String encryptedPass) {
                 
 

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.JuanGreenGarden.Gardening.domain.Exceptions.InvalidIdFormatException;
+import com.JuanGreenGarden.Gardening.domain.Exceptions.NotFoundEndPoint;
 import com.JuanGreenGarden.Gardening.domain.service.EmployeeService;
 import com.JuanGreenGarden.Gardening.persistence.entity.Employee;
 
@@ -35,29 +37,18 @@ public class EmployeeController {
     }
 
     @GetMapping("/{employeeId}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer employeeId) {
-        Employee employee = employeeService.getEmployeeById(employeeId);
-        return employee != null ?
-                new ResponseEntity<>(employee, HttpStatus.OK) :
-                new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable String employeeId) {
+        try {
+            Integer id = Integer.parseInt(employeeId);
+            Employee employee = employeeService.getEmployeeById(id);
+            if(employee != null){
+                return new ResponseEntity<>(employee, HttpStatus.OK);
+            } else {
+                throw new NotFoundEndPoint("Employee with ID " + id + " not found");
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidIdFormatException("Invalid format for employee ID: " + employeeId);
+        }
     }
 
-    @PostMapping
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
-        Employee createdEmployee = employeeService.createOrUpdateEmployee(employee);
-        return new ResponseEntity<>(createdEmployee, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{employeeId}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Integer employeeId, @RequestBody Employee employee) {
-        employee.setEmployeeNumber(employeeId);
-        Employee updatedEmployee = employeeService.createOrUpdateEmployee(employee);
-        return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{employeeId}")
-    public ResponseEntity<Void> deleteEmployee(@PathVariable Integer employeeId) {
-        employeeService.deleteEmployee(employeeId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
 }

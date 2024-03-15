@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.JuanGreenGarden.Gardening.domain.Exceptions.NotFoundEndPoint;
 import com.JuanGreenGarden.Gardening.domain.service.ProductService;
 import com.JuanGreenGarden.Gardening.persistence.entity.Product;
 
@@ -37,27 +38,10 @@ public class ProductController {
     @GetMapping("/{productCode}")
     public ResponseEntity<Product> getProductByCode(@PathVariable String productCode) {
         Product product = productService.getProductByCode(productCode);
-        return product != null ?
-                new ResponseEntity<>(product, HttpStatus.OK) :
-                new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        Product createdProduct = productService.createOrUpdateProduct(product);
-        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{productCode}")
-    public ResponseEntity<Product> updateProduct(@PathVariable String productCode, @RequestBody Product product) {
-        product.setProductCode(productCode);
-        Product updatedProduct = productService.createOrUpdateProduct(product);
-        return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{productCode}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable String productCode) {
-        productService.deleteProduct(productCode);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        if (product != null){
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        } else {
+            throw new NotFoundEndPoint("Product with ID"+ productCode + " not Found");
+        }
     }
 }
