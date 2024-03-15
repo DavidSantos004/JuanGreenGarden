@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -20,25 +22,26 @@ import jakarta.persistence.Table;
 @Table(name = "empleado")
 public class Employee {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo_empleado")
     private Integer employeeNumber;
 
-    @Column(name = "nombre", nullable = false)
+    @Column(name = "nombre", length = 50, nullable = false)
     private String firstName;
 
-    @Column(name = "apellido1", nullable = false)
+    @Column(name = "apellido1", length = 50, nullable = false)
     private String lastName1;
 
-    @Column(name = "apellido2")
+    @Column(name = "apellido2", length = 50)
     private String lastName2;
 
-    @Column(name = "extension", nullable = false)
+    @Column(name = "extension", length = 50, nullable = false)
     private String extension;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", length = 100, nullable = false)
     private String email;
 
-    @Column(name = "puesto")
+    @Column(name = "puesto", length = 50)
     private String jobTitle;
     
     // Relationships

@@ -2,6 +2,7 @@ package com.JuanGreenGarden.Gardening.persistence.entity;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.JuanGreenGarden.Gardening.persistence.entity.DTO.CustomerDTO;
@@ -10,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -21,44 +24,45 @@ import jakarta.persistence.Table;
 @Table(name = "cliente")
 public class Customer {
     @Id
-    @Column(name = "codigo_cliente")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "codigo_cliente", length = 50)
     private Integer customerNumber;
 
-    @Column(name = "nombre_cliente", nullable = false)
+    @Column(name = "nombre_cliente", length = 50, nullable = false)
     private String customerName;
 
-    @Column(name = "nombre_contacto")
+    @Column(name = "nombre_contacto", length = 30)
     private String contactFirstName;
 
-    @Column(name = "apellido_contacto")
+    @Column(name = "apellido_contacto", length = 30)
     private String contactLastName;
 
-    @Column(name = "telefono", nullable = false)
+    @Column(name = "telefono", length = 15,nullable = false)
     private String phone;
 
-    @Column(name = "fax", nullable = false)
+    @Column(name = "fax", length = 15, nullable = false)
     private String fax;
 
-    @Column(name = "linea_direccion1", nullable = false)
+    @Column(name = "linea_direccion1", length = 50, nullable = false)
     private String addressLine1;
 
-    @Column(name = "linea_direccion2")
+    @Column(name = "linea_direccion2", length = 50)
     private String addressLine2;
 
-    @Column(name = "ciudad", nullable = false)
+    @Column(name = "ciudad", length = 50, nullable = false)
     private String city;
 
-    @Column(name = "region")
+    @Column(name = "region", length = 50)
     private String region;
 
-    @Column(name = "pais")
+    @Column(name = "pais", length = 50)
     private String country;
 
-    @Column(name = "codigo_postal")
+    @Column(name = "codigo_postal", length = 50)
     private String postalCode;
 
-    @Column(name = "limite_credito")
-    private double creditLimit;
+    @Column(name = "limite_credito", columnDefinition = "numeric")
+    private BigDecimal creditLimit;
 
     // Relationships
 
