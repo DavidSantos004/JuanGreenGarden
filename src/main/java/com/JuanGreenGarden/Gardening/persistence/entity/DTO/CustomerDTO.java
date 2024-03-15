@@ -1,5 +1,7 @@
 package com.JuanGreenGarden.Gardening.persistence.entity.DTO;
 
+import java.math.BigDecimal;
+
 public class CustomerDTO {
     private Integer customerNumber;
     private String customerName;
@@ -13,7 +15,8 @@ public class CustomerDTO {
     private String region;
     private String country;
     private String postalCode;
-    private double creditLimit;
+    private BigDecimal creditLimit;
+
 
     public Integer getCustomerNumber() {
         return this.customerNumber;
@@ -111,13 +114,13 @@ public class CustomerDTO {
         this.postalCode = postalCode;
     }
 
-    public double getCreditLimit() {
+    public BigDecimal getCreditLimit() {
         return this.creditLimit;
     }
 
-    public void setCreditLimit(double creditLimit) {
+    public void setCreditLimit(BigDecimal creditLimit) {
         this.creditLimit = creditLimit;
     }
 
-    
+
 }
