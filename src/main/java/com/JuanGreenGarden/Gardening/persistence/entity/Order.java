@@ -5,8 +5,7 @@ import lombok.Data;
 import java.util.Date;
 import java.util.List;
 
-
-
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.OrderDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -59,4 +58,18 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "codigo_cliente", nullable = false)
     private Customer customerField;
+
+    //DTO
+    public OrderDTO toDTO(){
+        OrderDTO dto = new OrderDTO();
+
+        dto.setOrderNumber(orderNumber);
+        dto.setOrderDate(orderDate);
+        dto.setRequiredDate(requiredDate);
+        dto.setShippedDate(shippedDate);
+        dto.setStatus(status);
+        dto.setComments(comments);
+
+        return dto;
+    }
 }

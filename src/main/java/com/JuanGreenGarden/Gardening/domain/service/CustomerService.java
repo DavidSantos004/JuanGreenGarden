@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.JuanGreenGarden.Gardening.domain.repository.CustomerRepository;
 import com.JuanGreenGarden.Gardening.persistence.entity.Customer;
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.CustomerDTO;
+
 
 @Service
 public class CustomerService {
@@ -18,19 +20,13 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public List<Customer> getAllCustomers() {
-        return customerRepository.findAll();
-    }
-
     public Customer getCustomerById(Integer customerId) {
         return customerRepository.findById(customerId).orElse(null);
     }
 
-    public Customer createOrUpdateCustomer(Customer customer) {
-        return customerRepository.save(customer);
-    }
-
-    public void deleteCustomer(Integer customerId) {
-        customerRepository.deleteById(customerId);
-    }
+    public List<CustomerDTO> getAllCustomers() {
+        return customerRepository.findAll().stream()
+                .map(Customer::toDTO)
+                .toList();
+    }    
 }

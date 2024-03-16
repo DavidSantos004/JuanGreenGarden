@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.JuanGreenGarden.Gardening.domain.repository.PaymentRepository;
-import com.JuanGreenGarden.Gardening.domain.repository.ProductLineRepository;
 import com.JuanGreenGarden.Gardening.persistence.entity.Payment;
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.PaymentDTO;
 
 @Service
 public class PaymentService {
@@ -19,19 +19,13 @@ public class PaymentService {
         this.paymentRepository = paymentRepository;
     }
 
-    public List<Payment> getAllPayments() {
-        return paymentRepository.findAll();
-    }
-
     public Payment getPaymentById(Integer paymentId) {
         return paymentRepository.findById(paymentId).orElse(null);
     }
 
-    public Payment createOrUpdatePayment(Payment payment) {
-        return paymentRepository.save(payment);
-    }
-
-    public void deletePayment(Integer paymentId) {
-        paymentRepository.deleteById(paymentId);
-    }
+    public List<PaymentDTO> getAllPayments() {
+        return paymentRepository.findAll().stream()
+                .map(Payment::toDTO)
+                .toList();
+    }   
 }

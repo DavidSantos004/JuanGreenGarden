@@ -17,6 +17,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.*;;
+
 @Data
 @Entity
 @Table(name = "empleado")
@@ -61,4 +63,19 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "codigo_jefe")
     private Employee employeeField2;
+
+    //DTO
+    public EmployeeDTO toDTO(){
+        EmployeeDTO dto = new EmployeeDTO();
+        
+        dto.setEmployeeNumber(employeeNumber);
+        dto.setFirstName(firstName);
+        dto.setLastName1(lastName1);
+        dto.setLastName2(lastName2);
+        dto.setExtension(extension);
+        dto.setEmail(email);
+        dto.setJobTitle(jobTitle);
+        
+        return dto;
+    }
 }

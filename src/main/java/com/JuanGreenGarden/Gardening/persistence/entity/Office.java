@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.util.List;
 
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.OfficeDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -50,4 +51,19 @@ public class Office {
     @JsonIgnore
     @OneToMany(mappedBy = "officeField", fetch = FetchType.EAGER)
     private List<Employee> offices;
+
+    // DTO
+    public OfficeDTO toDTO(){
+        OfficeDTO dto = new OfficeDTO();
+        dto.setOfficeCode(officeCode);
+        dto.setCity(city);
+        dto.setCountry(country);
+        dto.setRegion(region);
+        dto.setPostalCode(postalCode);
+        dto.setPhone(phone);
+        dto.setAddressLine1(addressLine1);
+        dto.setAddressLine2(addressLine2);
+
+        return dto;
+    }
 }

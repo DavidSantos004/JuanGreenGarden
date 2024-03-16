@@ -1,6 +1,8 @@
 package com.JuanGreenGarden.Gardening.persistence.entity;
 
 
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.OrderDetailDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -34,5 +36,15 @@ public class OrderDetail {
     @ManyToOne
     @JoinColumn(name = "codigo_producto", referencedColumnName = "codigo_producto")
     private Product productField;
+
+    public OrderDetailDTO toDTO(){
+        OrderDetailDTO dto = new OrderDetailDTO();
+
+        dto.setOrderDetailId(orderDetailId);
+        dto.setQuantityOrdered(quantityOrdered);
+        dto.setPriceEach(priceEach);
+
+        return dto;
+    }
 
 }

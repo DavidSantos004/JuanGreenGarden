@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.JuanGreenGarden.Gardening.domain.repository.EmployeeRepository;
 import com.JuanGreenGarden.Gardening.persistence.entity.Employee;
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.EmployeeDTO;
 
 @Service
 public class EmployeeService {
@@ -18,19 +19,14 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
-    }
+    public List<EmployeeDTO> getAllEmployees() {
+        return employeeRepository.findAll().stream()
+                .map(Employee::toDTO)
+                .toList();
+    } 
 
     public Employee getEmployeeById(Integer employeeId) {
         return employeeRepository.findById(employeeId).orElse(null);
     }
 
-    public Employee createOrUpdateEmployee(Employee employee) {
-        return employeeRepository.save(employee);
-    }
-
-    public void deleteEmployee(Integer employeeId) {
-        employeeRepository.deleteById(employeeId);
-    }
 }

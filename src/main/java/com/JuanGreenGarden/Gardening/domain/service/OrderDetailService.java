@@ -4,11 +4,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import com.JuanGreenGarden.Gardening.domain.repository.OfficeRepository;
 import com.JuanGreenGarden.Gardening.domain.repository.OrderDetailRepository;
 import com.JuanGreenGarden.Gardening.persistence.entity.OrderDetail;
 import com.JuanGreenGarden.Gardening.persistence.entity.OrderDetailId;
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.OrderDetailDTO;
 
 @Service
 public class OrderDetailService {
@@ -20,19 +19,13 @@ public class OrderDetailService {
         this.orderDetailRepository = orderDetailRepository;
     }
 
-    public List<OrderDetail> getAllOrderDetails() {
-        return orderDetailRepository.findAll();
+    public List<OrderDetailDTO> getAllOrdersDetail() {
+        return orderDetailRepository.findAll().stream()
+                .map(OrderDetail::toDTO)
+                .toList();
     }
 
     public OrderDetail getOrderDetail(OrderDetailId orderDetailId) {
         return orderDetailRepository.findById(orderDetailId).orElse(null);
-    }
-
-    public OrderDetail createOrUpdateOrderDetail(OrderDetail orderDetail) {
-        return orderDetailRepository.save(orderDetail);
-    }
-
-    public void deleteOrderDetail(OrderDetailId orderDetailId) {
-        orderDetailRepository.deleteById(orderDetailId);
     }
 }

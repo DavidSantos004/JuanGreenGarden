@@ -3,6 +3,7 @@ package com.JuanGreenGarden.Gardening.persistence.entity;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.ProductDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -59,4 +60,18 @@ public class Product {
     @OneToMany(mappedBy = "productField", fetch = FetchType.EAGER)
     private List<OrderDetail> products;
 
+    public ProductDTO toDTO(){
+        ProductDTO dto = new ProductDTO();
+
+        dto.setProductCode(productCode);
+        dto.setProductName(productName);
+        dto.setProductScale(productScale);
+        dto.setProductVendor(productVendor);
+        dto.setProductDescription(productDescription);
+        dto.setQuantityInStock(quantityInStock);
+        dto.setBuyPrice(buyPrice);
+        dto.setMSRP(MSRP);
+
+        return dto;
+    }
 }

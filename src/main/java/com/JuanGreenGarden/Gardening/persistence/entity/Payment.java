@@ -3,6 +3,8 @@ package com.JuanGreenGarden.Gardening.persistence.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.PaymentDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -48,4 +50,17 @@ public class Payment {
     @ManyToOne
     @JoinColumn(name = "codigo_cliente", referencedColumnName = "codigo_cliente", insertable = false, updatable = false)
     private Customer customerField2;
+
+    //DTO
+    public PaymentDTO toDTO(){
+        PaymentDTO dto = new PaymentDTO();
+
+        dto.setCustomerNumber(customerNumber);
+        dto.setTransactionId(transactionId);
+        dto.setPaymentDate(paymentDate);
+        dto.setAmount(amount);
+        dto.setPaymentMethod(paymentMethod);
+        
+        return dto;
+    }
 }
