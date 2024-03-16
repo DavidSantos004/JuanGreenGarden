@@ -7,5 +7,6 @@ import com.JuanGreenGarden.Gardening.persistence.entity.ProductLine;
 
 @Repository
 public interface ProductLineRepository extends JpaRepository<ProductLine, String>{
-    
+    ProductLine findByProductLine(String productLine);
+
 }

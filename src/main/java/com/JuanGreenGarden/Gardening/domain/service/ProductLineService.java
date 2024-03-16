@@ -28,4 +28,8 @@ public class ProductLineService {
                 .map(ProductLine::toDTO)
                 .toList();
     }   
+
+    public ProductLine getProductLine(String productLine) {
+        return productLineRepository.findByProductLine(productLine);
+    }
 }
