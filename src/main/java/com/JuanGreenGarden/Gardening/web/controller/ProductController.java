@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.JuanGreenGarden.Gardening.domain.Exceptions.NotFoundEndPoint;
 import com.JuanGreenGarden.Gardening.domain.service.ProductService;
 import com.JuanGreenGarden.Gardening.persistence.entity.Product;
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.ProductDTO;
 
 @RestController
 @RequestMapping("/api/products")
@@ -30,8 +31,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Product>> getAllProducts() {
-        List<Product> products = productService.getAllProducts();
+    public ResponseEntity<List<ProductDTO>> getAllProducts() {
+        List<ProductDTO> products = productService.getAllProducts();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 

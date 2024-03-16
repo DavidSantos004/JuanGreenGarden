@@ -19,6 +19,7 @@ import com.JuanGreenGarden.Gardening.domain.Exceptions.NotFoundEndPoint;
 import com.JuanGreenGarden.Gardening.domain.service.OrderDetailService;
 import com.JuanGreenGarden.Gardening.persistence.entity.OrderDetail;
 import com.JuanGreenGarden.Gardening.persistence.entity.OrderDetailId;
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.OrderDetailDTO;
 @RestController
 @RequestMapping("/api/orderdetails")
 public class OrderDetailController {
@@ -31,8 +32,8 @@ public class OrderDetailController {
     }
 
     @GetMapping
-    public ResponseEntity<List<OrderDetail>> getAllOrderDetails() {
-        List<OrderDetail> orderDetails = orderDetailService.getAllOrderDetails();
+    public ResponseEntity<List<OrderDetailDTO>> getAllOrderDetails() {
+        List<OrderDetailDTO> orderDetails = orderDetailService.getAllOrdersDetail();
         return new ResponseEntity<>(orderDetails, HttpStatus.OK);
     }
 

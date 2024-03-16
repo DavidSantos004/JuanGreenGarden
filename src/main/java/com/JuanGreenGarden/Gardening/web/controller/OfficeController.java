@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.JuanGreenGarden.Gardening.domain.Exceptions.NotFoundEndPoint;
 import com.JuanGreenGarden.Gardening.domain.service.OfficeService;
 import com.JuanGreenGarden.Gardening.persistence.entity.Office;
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.OfficeDTO;
 
 @RestController
 @RequestMapping("/api/offices")
@@ -30,8 +31,8 @@ public class OfficeController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Office>> getAllOffices() {
-        List<Office> offices = officeService.getAllOffices();
+    public ResponseEntity<List<OfficeDTO>> getAllOffices() {
+        List<OfficeDTO> offices = officeService.getAllOffices();
         return new ResponseEntity<>(offices, HttpStatus.OK);
     }
 

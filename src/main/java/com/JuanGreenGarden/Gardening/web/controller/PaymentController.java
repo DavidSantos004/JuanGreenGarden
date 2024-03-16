@@ -17,6 +17,7 @@ import com.JuanGreenGarden.Gardening.domain.Exceptions.DifferentDataTypeExceptio
 import com.JuanGreenGarden.Gardening.domain.Exceptions.NotFoundEndPoint;
 import com.JuanGreenGarden.Gardening.domain.service.PaymentService;
 import com.JuanGreenGarden.Gardening.persistence.entity.Payment;
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.PaymentDTO;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -32,8 +33,8 @@ public class PaymentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Payment>> getAllPayments() {
-        List<Payment> payments = paymentService.getAllPayments();
+    public ResponseEntity<List<PaymentDTO>> getAllPayments() {
+        List<PaymentDTO> payments = paymentService.getAllPayments();
         return new ResponseEntity<>(payments, HttpStatus.OK);
     }
 

@@ -18,6 +18,7 @@ import com.JuanGreenGarden.Gardening.domain.Exceptions.InvalidIdFormatException;
 import com.JuanGreenGarden.Gardening.domain.Exceptions.NotFoundEndPoint;
 import com.JuanGreenGarden.Gardening.domain.service.EmployeeService;
 import com.JuanGreenGarden.Gardening.persistence.entity.Employee;
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.EmployeeDTO;
 
 @RestController
 @RequestMapping("/api/employees")
@@ -31,8 +32,8 @@ public class EmployeeController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Employee>> getAllEmployees() {
-        List<Employee> employees = employeeService.getAllEmployees();
+    public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
+        List<EmployeeDTO> employees = employeeService.getAllEmployees();
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 

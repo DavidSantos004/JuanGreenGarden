@@ -18,6 +18,7 @@ import com.JuanGreenGarden.Gardening.domain.Exceptions.InvalidIdFormatException;
 import com.JuanGreenGarden.Gardening.domain.Exceptions.NotFoundEndPoint;
 import com.JuanGreenGarden.Gardening.domain.service.OrderService;
 import com.JuanGreenGarden.Gardening.persistence.entity.Order;
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.OrderDTO;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -31,8 +32,8 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Order>> getAllOrders() {
-        List<Order> orders = orderService.getAllOrders();
+    public ResponseEntity<List<OrderDTO>> getAllOrders() {
+        List<OrderDTO> orders = orderService.getAllOrders();
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 

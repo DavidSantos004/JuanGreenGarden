@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.JuanGreenGarden.Gardening.domain.Exceptions.DifferentDataTypeException;
 import com.JuanGreenGarden.Gardening.domain.Exceptions.InvalidIdFormatException;
 import com.JuanGreenGarden.Gardening.domain.Exceptions.NotFoundEndPoint;
 import com.JuanGreenGarden.Gardening.domain.service.CustomerService;
 import com.JuanGreenGarden.Gardening.persistence.entity.Customer;
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.CustomerDTO;
 
 
 
@@ -35,8 +35,8 @@ public class CustomerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Customer>> getAllCustomers() {
-        List<Customer> customers = customerService.getAllCustomers();
+    public ResponseEntity<List<CustomerDTO>> getAllCustomers() {
+        List<CustomerDTO> customers = customerService.getAllCustomers();
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 

@@ -4,6 +4,8 @@ package com.JuanGreenGarden.Gardening.web.controller;
 import com.JuanGreenGarden.Gardening.domain.Exceptions.NotFoundEndPoint;
 import com.JuanGreenGarden.Gardening.domain.service.ProductLineService;
 import com.JuanGreenGarden.Gardening.persistence.entity.ProductLine;
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.ProductLineDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +24,8 @@ public class ProductLineController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductLine>> getAllProductLines() {
-        List<ProductLine> productLines = productLineService.getAllProductLines();
+    public ResponseEntity<List<ProductLineDTO>> getAllProductLines() {
+        List<ProductLineDTO> productLines = productLineService.getAllProductLines();
         return new ResponseEntity<>(productLines, HttpStatus.OK);
     }
 
