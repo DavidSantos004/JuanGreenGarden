@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.JuanGreenGarden.Gardening.domain.repository.ProductLineRepository;
 import com.JuanGreenGarden.Gardening.persistence.entity.ProductLine;
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.ProductLineDTO;
 
 @Service
 public class ProductLineService {
@@ -18,19 +19,13 @@ public class ProductLineService {
         this.productLineRepository = productLineRepository;
     }
 
-    public List<ProductLine> getAllProductLines() {
-        return productLineRepository.findAll();
-    }
-
-    public ProductLine getProductLine(String productLine) {
-        return productLineRepository.findById(productLine).orElse(null);
-    }
-
-    public ProductLine createOrUpdateProductLine(ProductLine productLine) {
-        return productLineRepository.save(productLine);
-    }
-
     public void deleteProductLine(String productLine) {
         productLineRepository.deleteById(productLine);
     }
+
+    public List<ProductLineDTO> getAllProductLines() {
+        return productLineRepository.findAll().stream()
+                .map(ProductLine::toDTO)
+                .toList();
+    }   
 }

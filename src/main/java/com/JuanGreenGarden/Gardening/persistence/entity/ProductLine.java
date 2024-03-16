@@ -14,6 +14,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.ProductLineDTO;;
 
 @Data
 @Entity
@@ -38,4 +39,16 @@ public class ProductLine {
     @JsonIgnore
     @OneToMany(mappedBy = "productLineField", fetch = FetchType.EAGER)
     private List<Product> productLines;
+
+    // DTO
+    public ProductLineDTO toDTO(){
+        ProductLineDTO dto = new ProductLineDTO();
+
+        dto.setProductLine(productLine);
+        dto.setTextDescription(textDescription);
+        dto.setHtmlDescription(htmlDescription);
+        dto.setImage(image);
+
+        return dto;
+    }
 }

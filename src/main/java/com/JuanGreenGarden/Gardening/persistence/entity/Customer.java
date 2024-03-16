@@ -5,6 +5,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.CustomerDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -78,6 +79,23 @@ public class Customer {
     @JoinColumn(name = "codigo_empleado_rep_ventas")
     private Employee employeeField;
 
-    
+    // DTO
+    public CustomerDTO toDTO(){
+        CustomerDTO dto = new CustomerDTO();
+        dto.setCustomerNumber(customerNumber);
+        dto.setCustomerName(customerName);
+        dto.setContactFirstName(contactFirstName);
+        dto.setContactLastName(contactLastName);
+        dto.setPhone(phone);
+        dto.setFax(fax);
+        dto.setAddressLine1(addressLine1);
+        dto.setAddressLine2(addressLine2);
+        dto.setCity(city);
+        dto.setRegion(region);
+        dto.setCountry(country);
+        dto.setPostalCode(postalCode);
+        dto.setCreditLimit(creditLimit);
+        return dto;
+    }  
 }
 

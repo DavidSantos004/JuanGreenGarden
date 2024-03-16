@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.JuanGreenGarden.Gardening.domain.repository.OrderRepository;
 import com.JuanGreenGarden.Gardening.persistence.entity.Order;
+import com.JuanGreenGarden.Gardening.persistence.entity.DTO.OrderDTO;
 
 @Service
 public class OrderService {
@@ -18,19 +19,15 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
+    public List<OrderDTO> getAllOrders() {
+        return orderRepository.findAll().stream()
+                .map(Order::toDTO)
+                .toList();
     }
 
     public Order getOrderById(Integer orderId) {
         return orderRepository.findById(orderId).orElse(null);
     }
 
-    public Order createOrUpdateOrder(Order order) {
-        return orderRepository.save(order);
-    }
-
-    public void deleteOrder(Integer orderId) {
-        orderRepository.deleteById(orderId);
-    }
+    
 }
