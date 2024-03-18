@@ -10,6 +10,16 @@ const summaryQueriesContent = document.getElementById("summary-queries");
 const wrapper = document.getElementById("wrapper");
 const queriesOptions = document.getElementById("content-container");
 
+function login() {
+    x.classList.add('active-form'); // Muestra el formulario de inicio de sesión
+    y.classList.remove('active-form'); // Oculta el formulario de registro
+}
+
+function register() {
+    x.classList.remove('active-form'); // Oculta el formulario de inicio de sesión
+    y.classList.add('active-form'); // Muestra el formulario de registro
+}
+
 
 queriesAboutTableLink.addEventListener("click", function(event) {
     event.preventDefault();
