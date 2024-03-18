@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+    <title>JuanGreenGarden | Home</title>
+    <style>
+        #queries-about-a-table {
+            display: none;
+        }
+        .query-options {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .query-options li {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .query-options li:last-child {
+            border-bottom: none;
+        }
+        .query-options li:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+<nav class="nav">
+    <div class="nav-logo">
+        <p>JuanGreenGarden</p>
+    </div>
+    <div class="nav-menu" id="navMenu">
+        <ul>
+            <li><a href="#" class="link active">Home</a></li>
+            <li><a href="#" class="linkQueriesAboutTable">Queries about a table</a></li>
+            <li><a href="#" class="linkMultiTableQueries">Multi-table queries (Internal composition)</a></li>
+            <li><a href="#" class="linkSummaryQueries">Summary queries</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="wrapper" id="wrapper">
+    <div id="content-container">
+        <div id="queries-about-a-table" class="card-content hidden">
+            <h2></h2>
+            <!-- Aquí se mostrará el contenido de la consulta seleccionada -->
+            <div id="query-result"></div>
+        </div>
+        <div id="multi-table-queries" class="card-content hidden">
+            <h2></h2>
+            <!-- Aquí se mostrará el contenido de la consulta seleccionada -->
+            <div id="query-result"></div>
+        </div>
+        <div id="summary-queries" class="card-content hidden">
+            <h2></h2>
+            <!-- Aquí se mostrará el contenido de la consulta seleccionada -->
+            <div id="query-result"></div>
+        </div>
+        
+    </div>
+    <div class="main-content">
+        <div class="project-description">
+            <h1>Welcome to JuanGreenGarden</h1>
+            <p>JuanGreenGarden is a project aimed at supporting the operations of a gardening company. It covers various areas, from office details and employees to the management of customers, orders, products, and payments. The project utilizes Java programming language, Spring Boot framework, PostgreSQL database for development. Our goal is to create a web application with both backend and frontend, adhering to best development practices.</p>
+            <p>We are dedicated to providing an intuitive and engaging user experience by leveraging modern web technologies. Our team continuously improves and expands the platform to meet the needs of our growing community.</p>
+        </div>
+        <div class="team-section">
+            <h2>Our Team</h2>
+            <div class="team-member">
+                <img src="team-member1.jpg" alt="Team Member 1">
+                <h3>David Santos</h3>
+                <p>Lead Developer</p>
+            </div>
+            <div class="team-member">
+                <img src="team-member2.jpg" alt="Team Member 2">
+                <h3>Robert Fabian</h3>
+                <p>UI/UX Designer</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/frontend/auth.js"></script>
+<script src="/frontend/main.js"></script>
+
+</body>
+</html>

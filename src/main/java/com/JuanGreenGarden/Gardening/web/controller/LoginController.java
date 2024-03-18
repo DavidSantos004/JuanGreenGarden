@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.JuanGreenGarden.Gardening.domain.repository.AdminRepository;
 import com.JuanGreenGarden.Gardening.domain.security.JWTAuthorizationConfig;
 import com.JuanGreenGarden.Gardening.persistence.entity.Admin;
-import com.JuanGreenGarden.Gardening.persistence.entity.UserProject;
 
 @RestController
 public class LoginController {
@@ -20,9 +19,10 @@ public class LoginController {
     @Autowired
     private AdminRepository adminRepository;
 
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
-    @PostMapping("login")
+    @CrossOrigin(origins = "http://127.0.0.1:5501")
+    @PostMapping("/login")
     public String login(
+
             @RequestParam("username") String username,
             @RequestParam("password") String password) {
                 
