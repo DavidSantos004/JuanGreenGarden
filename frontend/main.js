@@ -154,6 +154,8 @@ function generateQueryOptionsSummaryQueries() {
 
     queryOptionsSummaryQueries.forEach((option, index) => {
         const optionItem = document.createElement("li");
+        const optionId = `summary-query-${index + 1}`; // Genera el ID único
+        optionItem.id = optionId; // Asigna el ID al elemento <li>
         optionItem.textContent = `Summary Query ${index + 1}: ${option}`;
         optionItem.addEventListener("click", function() {
             showQueryOption(option);
@@ -171,6 +173,8 @@ function generateQueryOptionsMultiTableQueries() {
 
     queryOptionsMultiTableQueries.forEach((option, index) => {
         const optionItem = document.createElement("li");
+        const optionId = `multi-table-query-${index + 1}`; // Genera el ID único
+        optionItem.id = optionId; // Asigna el ID al elemento <li>
         optionItem.textContent = `Query ${index + 1}: ${option}`;
         optionItem.addEventListener("click", function() {
             showQueryOption(option);
@@ -181,6 +185,7 @@ function generateQueryOptionsMultiTableQueries() {
     queriesContent.innerHTML = ""; // Borra el contenido anterior
     queriesContent.appendChild(optionsList);
 }
+
 
 // Función para mostrar la opción seleccionada
 function showQueryOption(option) {
@@ -194,6 +199,8 @@ function generateQueryOptionsAboutTable() {
 
     queryOptionsAboutTable.forEach((option, index) => {
         const optionItem = document.createElement("li");
+        const optionId = `about-table-query-${index + 1}`; // Genera el ID único
+        optionItem.id = optionId; // Asigna el ID al elemento <li>
         optionItem.textContent = `Consulta ${index + 1}: ${option}`;
         optionItem.addEventListener("click", function() {
             showQueryOption(option);
@@ -204,6 +211,7 @@ function generateQueryOptionsAboutTable() {
     queriesContent.innerHTML = ""; // Borra el contenido anterior
     queriesContent.appendChild(optionsList);
 }
+
 
 queriesAboutTableLink.addEventListener("click", function(event) {
     event.preventDefault();
