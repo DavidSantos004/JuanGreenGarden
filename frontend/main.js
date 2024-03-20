@@ -1,5 +1,5 @@
 const homeLink = document.querySelector(".link.active");
-const queriesAboutTableLink = document.querySelector(".linkQueriesAboutTable");
+const Allqueries = document.querySelector(".linkQueries");
 const multiTableQueriesLink = document.querySelector(".linkMultiTableQueries");
 const summaryQueriesLink = document.querySelector(".linkSummaryQueries");
 
@@ -9,6 +9,8 @@ const multiTableQueriesContent = document.getElementById("multi-table-queries");
 const summaryQueriesContent = document.getElementById("summary-queries");
 const wrapper = document.getElementById("wrapper");
 const queriesOptions = document.getElementById("content-container");
+const cards = document.querySelector(".container");
+
 
 function login() {
     x.classList.add('active-form'); // Muestra el formulario de inicio de sesión
@@ -21,7 +23,8 @@ function register() {
 }
 
 
-queriesAboutTableLink.addEventListener("click", function(event) {
+Allqueries.addEventListener("click", function(event) {
+    console.log("cartas queries")
     event.preventDefault();
     // Ocultar contenido principal
     mainContent.style.display = "none";
@@ -29,9 +32,10 @@ queriesAboutTableLink.addEventListener("click", function(event) {
     queriesContent.classList.remove("hidden");
     queriesContent.style.display = "contents";
     wrapper.style.justifyContent = "flex-start";
-    queriesOptions.style.display = "flex";
+    queriesOptions.style.display = "none";
     multiTableQueriesContent.style.display = "none"
-    summaryQueriesContent.style.display = "none"
+    summaryQueriesContent.style.display = "none" 
+    
 });
 
 multiTableQueriesLink.addEventListener("click", function(event) {
@@ -46,6 +50,7 @@ multiTableQueriesLink.addEventListener("click", function(event) {
     wrapper.style.justifyContent = "flex-start";
     queriesOptions.style.display = "flex";
     summaryQueriesContent.style.display = "none"
+    cards.style.display = "none";
 
     generateQueryOptionsMultiTableQueries(); 
 });
@@ -60,8 +65,9 @@ summaryQueriesLink.addEventListener("click", function(event) {
     queriesOptions.style.display = "flex";
     summaryQueriesContent.style.display = "flex"
     multiTableQueriesContent.style.display = "none"
-    queriesAboutTableLink.style.display = "none"
-    queriesAboutTableLink.style.display = "flex"
+    Allqueries.style.display = "none"
+    Allqueries.style.display = "flex"
+    cards.style.display = "none";
 
     generateQueryOptionsSummaryQueries();
 
@@ -75,6 +81,7 @@ homeLink.addEventListener("click", function(event) {
     queriesContent.style.display = "none";
     wrapper.style.justifyContent = "center";
     queriesOptions.style.display = "none";
+    cards.style.display = "none";
 });
 
 // ...................................................................................
@@ -192,31 +199,11 @@ function showQueryOption(option) {
     queryResult.innerHTML = `<p>${option}</p>`;
 }
 
-// Genera la lista de opciones de consulta
-function generateQueryOptionsAboutTable() {
-    const optionsList = document.createElement("ul");
-    optionsList.classList.add("query-options");
-
-    queryOptionsAboutTable.forEach((option, index) => {
-        const optionItem = document.createElement("li");
-        const optionId = `about-table-query-${index + 1}`; // Genera el ID único
-        optionItem.id = optionId; // Asigna el ID al elemento <li>
-        optionItem.textContent = `Consulta ${index + 1}: ${option}`;
-        optionItem.addEventListener("click", function() {
-            showQueryOption(option);
-        });
-        optionsList.appendChild(optionItem);
-    });
-
-    queriesContent.innerHTML = ""; // Borra el contenido anterior
-    queriesContent.appendChild(optionsList);
-}
 
 
-queriesAboutTableLink.addEventListener("click", function(event) {
+Allqueries.addEventListener("click", function(event) {
     event.preventDefault();
     queriesContent.classList.remove("hidden"); // Mostrar área de contenido
-    generateQueryOptionsAboutTable();
 });
 
 //....................................................
@@ -229,3 +216,4 @@ multiTableQueriesLink.addEventListener("click", function(event) {
     multiTableQueriesContent.classList.remove("hidden");
     generateQueryOptionsMultiTableQueries();
 });
+
