@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,10 +22,14 @@ import com.JuanGreenGarden.Gardening.domain.service.CustomerService;
 import com.JuanGreenGarden.Gardening.persistence.entity.Customer;
 import com.JuanGreenGarden.Gardening.persistence.entity.DTO.CustomerDTO;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 
 
 @RestController
 @RequestMapping("/api/customers")
+@PreAuthorize("hasRole('ADMIN')")
+@SecurityRequirement(name = "bearerAuth")
 public class CustomerController {
 
     private final CustomerService customerService;

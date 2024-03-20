@@ -6,14 +6,19 @@ import com.JuanGreenGarden.Gardening.domain.service.ProductLineService;
 import com.JuanGreenGarden.Gardening.persistence.entity.ProductLine;
 import com.JuanGreenGarden.Gardening.persistence.entity.DTO.ProductLineDTO;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/productlines")
+@PreAuthorize("hasRole('ADMIN')")
+@SecurityRequirement(name = "bearerAuth")
 public class ProductLineController {
 
     private final ProductLineService productLineService;
