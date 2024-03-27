@@ -58,7 +58,7 @@ public class Payment {
         dto.setCustomerNumber(customerNumber);
         dto.setTransactionId(transactionId);
         dto.setPaymentDate(paymentDate);
-        dto.setAmount(amount);
+        dto.setAmount(amount);  
         dto.setPaymentMethod(paymentMethod);
         
         return dto;

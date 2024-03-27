@@ -23,6 +23,9 @@ import com.JuanGreenGarden.Gardening.persistence.entity.DTO.OrderDTO;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
+/**
+ * Controlador REST para operaciones relacionadas con las órdenes.
+ */
 @RestController
 @RequestMapping("/api/orders")
 @PreAuthorize("hasRole('ADMIN')")
@@ -36,12 +39,25 @@ public class OrderController {
         this.orderService = orderService;
     }
 
+    /**
+     * Obtiene todas las órdenes.
+     * 
+     * @return Una respuesta con una lista de todas las órdenes.
+     */
     @GetMapping
     public ResponseEntity<List<OrderDTO>> getAllOrders() {
         List<OrderDTO> orders = orderService.getAllOrders();
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
+    /**
+     * Obtiene una orden por su ID.
+     * 
+     * @param orderId El ID de la orden.
+     * @return Una respuesta con la orden correspondiente al ID especificado.
+     * @throws NotFoundEndPoint Si no se encuentra ninguna orden con el ID especificado.
+     * @throws InvalidIdFormatException Si el formato del ID de la orden es inválido.
+     */
     @GetMapping("/{orderId}")
     public ResponseEntity<Order> getOrderById(@PathVariable String orderId) {
         try {
@@ -57,5 +73,50 @@ public class OrderController {
         }
     }
 
+
+    /**
+     * Obtiene las órdenes retrasadas.
+     * 
+     * @return Una respuesta con una lista de las órdenes retrasadas.
+     */
+    @GetMapping("/delayed")
+    public ResponseEntity<List<Object[]>> getDelayedOrders() {
+        List<Object[]> delayedOrders = orderService.getDelayedOrders();
+        return new ResponseEntity<>(delayedOrders, HttpStatus.OK);
+    }
+
+
+    /**
+     * Obtiene las órdenes entregadas temprano.
+     * 
+     * @return Una respuesta con una lista de las órdenes entregadas temprano.
+     */
+    @GetMapping("/delivered-early")
+    public ResponseEntity<List<Object[]>> getOrdersDeliveredEarly() {
+        List<Object[]> orders = orderService.getOrdersDeliveredEarly();
+        return new ResponseEntity<>(orders, HttpStatus.OK);
+    }
+
+    /**
+     * Obtiene las órdenes rechazadas en el año 2009.
+     * 
+     * @return Una respuesta con una lista de las órdenes rechazadas en el año 2009.
+     */
+    @GetMapping("/rejected-in-2009")
+    public ResponseEntity<List<Order>> getRejectedOrdersIn2009() {
+        List<Order> rejectedOrders = orderService.getRejectedOrdersIn2009();
+        return new ResponseEntity<>(rejectedOrders, HttpStatus.OK);
+    }
+
+    /**
+     * Obtiene las órdenes entregadas en enero.
+     * 
+     * @return Una respuesta con una lista de las órdenes entregadas en enero.
+     */
+    @GetMapping("/delivered-in-january")
+    public ResponseEntity<List<Order>> getOrdersDeliveredInJanuary() {
+        List<Order> orders = orderService.getOrdersDeliveredInJanuary();
+        return new ResponseEntity<>(orders, HttpStatus.OK);
+    }
 
 }

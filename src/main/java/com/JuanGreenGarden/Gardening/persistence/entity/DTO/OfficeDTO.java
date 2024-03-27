@@ -10,7 +10,6 @@ public class OfficeDTO {
     private String addressLine1;
     private String addressLine2;
 
-
     public String getOfficeCode() {
         return this.officeCode;
     }
@@ -75,4 +74,5 @@ public class OfficeDTO {
         this.addressLine2 = addressLine2;
     }
 
+    //usted que dice?
 }
