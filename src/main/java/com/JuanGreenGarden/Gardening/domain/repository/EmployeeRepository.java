@@ -34,4 +34,31 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>  {
      */
     List<Employee> findByJobTitleNot(String jobTitle);
 
+
+    /**
+     * Encuentra una lista de empleados que no tienen una oficina asociada.
+     *
+     * @return Lista de empleados sin una oficina asociada
+     */
+    List<Employee> findByOfficeFieldIsNull();
+
+    /**
+     * Recupera una lista de empleados que no tienen clientes asociados.
+     *
+     * @return Lista de empleados sin clientes asociados.
+     */
+    List<Employee> findByEmployeesIsNull();
+
+    /**
+     * Busca una lista de empleados que no tienen clientes asociados y tienen una oficina asignada.
+     *
+     * @return Lista de empleados sin clientes asociados y con una oficina asignada
+     */
+    List<Employee> findByEmployeesIsEmptyAndOfficeFieldIsNotNull();
+
+    List<Employee> findByOfficeFieldIsNullAndEmployeesIsEmpty();
+
+    
+
+    
 }

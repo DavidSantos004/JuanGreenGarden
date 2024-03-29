@@ -1,8 +1,11 @@
 package com.JuanGreenGarden.Gardening.domain.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.JuanGreenGarden.Gardening.domain.repository.EmployeeRepository;
@@ -73,4 +76,47 @@ public class EmployeeService {
                 .map(Employee::toDTO)
                 .toList();
     }
+
+/**
+     * Obtiene una lista de empleados que no tienen una oficina asociada.
+     *
+     * @return Lista de empleados sin una oficina asociada
+     */
+    public List<Employee> getEmployeesWithoutOffice() {
+        return employeeRepository.findByOfficeFieldIsNull();
+    }
+    
+    
+    /**
+     * Obtiene una lista de empleados que no tienen clientes asociados.
+     * @return Lista de empleados sin clientes asociados.
+     */
+    public List<Employee> getEmployeesWithoutCustomers() {
+        return employeeRepository.findByEmployeesIsNull();
+    }
+
+    /**
+     * Obtiene una lista de empleados que no tienen clientes asociados y tienen una oficina asignada.
+     *
+     * @return Lista de empleados sin clientes asociados y con una oficina asignada
+     */
+    public List<Employee> getEmployeesWithoutCustomersAndOffice() {
+        return employeeRepository.findByEmployeesIsEmptyAndOfficeFieldIsNotNull();
+    }
+
+    /**
+     * Obtiene una lista de empleados que no tienen una oficina asociada ni un cliente asociado.
+     *
+     * @return Lista de empleados sin una oficina asociada ni un cliente asociado
+     */
+    public ResponseEntity<?> getEmployeesWithoutOfficeAndCustomer() {
+        List<Employee> employees = employeeRepository.findByOfficeFieldIsNullAndEmployeesIsEmpty();
+        if (employees.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron empleados sin una oficina asociada ni un cliente asociado.");
+        } else {
+            return ResponseEntity.ok(employees);
+        }
+    }
+
+    
 }

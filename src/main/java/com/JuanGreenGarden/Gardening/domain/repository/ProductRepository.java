@@ -3,6 +3,7 @@ package com.JuanGreenGarden.Gardening.domain.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.JuanGreenGarden.Gardening.persistence.entity.Product;
@@ -22,4 +23,6 @@ public interface ProductRepository extends JpaRepository<Product, String> {
      */
     List<Product> findByProductLineFieldProductLineAndQuantityInStockGreaterThan(String productLine, int quantityInStock);
 
+    @Query("SELECT p FROM Product p WHERE NOT EXISTS (SELECT od FROM OrderDetail od WHERE od.productField = p)")
+    List<Product> findProductsNotInOrders();
 }

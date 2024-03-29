@@ -68,4 +68,11 @@ public class ProductController {
     public List<Product> getOrnamentalesWithStockOver100() {
         return productService.getProductsByProductLineAndQuantityInStock("Ornamentales", 100);
     }
+
+
+    @GetMapping("/not-in-orders")
+    public ResponseEntity<List<Product>> getProductsNotInOrders() {
+        List<Product> products = productService.findProductsNotInOrders();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
 }

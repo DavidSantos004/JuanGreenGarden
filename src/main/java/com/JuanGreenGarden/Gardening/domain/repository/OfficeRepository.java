@@ -28,4 +28,16 @@ public interface OfficeRepository extends JpaRepository<Office, String> {
      */
     @Query("SELECT o.city, o.phone FROM Office o WHERE o.country = 'España'")
     List<Object[]> findOfficesInSpain();
+
+    /**
+     * Busca las direcciones de las oficinas que tienen clientes en Fuenlabrada.
+     * 
+     * @return Lista de direcciones de las oficinas con clientes en Fuenlabrada.
+     */
+    @Query("SELECT DISTINCT o.addressLine1 FROM Office o " +
+       "JOIN o.offices e " +
+       "JOIN e.employees c " + 
+       "WHERE c.city = 'Fuenlabrada'")
+    List<String> findOfficeAddressesWithCustomersInFuenlabrada();
+
 }

@@ -137,7 +137,15 @@ public class OfficeService {
         return officeRepository.findOfficesInSpain();
     }
 
+    /**
+     * Obtiene las direcciones de las oficinas que tienen clientes en Fuenlabrada.
+     * 
+     * @return Lista de direcciones de las oficinas con clientes en Fuenlabrada.
+     */
+    public List<String> getOfficeAddressesWithCustomersInFuenlabrada() {
+        return officeRepository.findOfficeAddressesWithCustomersInFuenlabrada();
+    } 
+
    
-        
 
 }

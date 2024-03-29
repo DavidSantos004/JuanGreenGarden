@@ -119,4 +119,25 @@ public class OrderController {
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
+    /**
+     * Endpoint para obtener los nombres de los clientes con entregas tardías.
+     *
+     * @return ResponseEntity con la lista de nombres de clientes y el estado HTTP correspondiente.
+     */
+    @GetMapping("/late-delivery")
+    public ResponseEntity<List<String>> getClientesEntregaTardia() {
+        List<String> clientesEntregaTardia = orderService.findCustomersWithDelayedOrders();
+        return new ResponseEntity<>(clientesEntregaTardia, HttpStatus.OK);
+    }
+
+    /**
+     * Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.
+     *
+     * @return Lista de las diferentes gamas de producto que ha comprado cada cliente.
+     */
+    @GetMapping("/product-lines-purchased")
+    public ResponseEntity<List<String>> findAllProductLinesByCustomers() {
+        List<String> productLines = orderService.findAllProductLinesByCustomers();
+        return new ResponseEntity<>(productLines, HttpStatus.OK);
+    }
 }

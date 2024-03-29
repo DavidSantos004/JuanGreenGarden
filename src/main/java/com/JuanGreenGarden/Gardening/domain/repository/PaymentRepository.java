@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.JuanGreenGarden.Gardening.persistence.entity.Payment;
+import com.JuanGreenGarden.Gardening.persistence.entity.Product;
 
 /**
  * Repositorio para la entidad Payment.
@@ -40,5 +41,6 @@ public interface PaymentRepository extends JpaRepository<Payment, Integer> {
      */
     @Query("SELECT DISTINCT p.paymentMethod FROM Payment p")
     List<String> findAllPaymentMethods();
+
 
 }

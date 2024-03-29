@@ -92,4 +92,52 @@ public class CustomerController {
         return customerService.getCustomersInMadridWithSalesRepresentatives(employeeNumbers);
     }
 
+
+    /**
+     * Obtiene una lista de clientes que han realizado pagos.
+     *
+     * @return Lista de clientes con pagos realizados
+     */
+    @GetMapping("/with-payments")
+    public List<Customer> getCustomersWithPayments() {
+        return customerService.getCustomersWithPayments();
+    }
+
+    /**
+     * Obtiene una lista de clientes que **no** han realizado pagos.
+     *
+     * @return Lista de clientes sin pagos realizados
+     */
+    @GetMapping("/without-payments")
+    public List<Customer> getCustomersWithoutPayments() {
+        return customerService.getCustomersWithoutPayments();
+    }
+
+    /**
+     * Obtiene una lista de clientes que **no** han realizado pedidos.
+     *
+     * @return Lista de clientes sin pedidos realizados
+     */
+    @GetMapping("/without-orders")
+    public ResponseEntity<List<Customer>> getCustomersWithoutOrders() {
+        List<Customer> customers = customerService.getCustomersWithoutOrders();
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
+     /**
+     * Obtiene una lista de clientes que no han realizado pedidos ni pagos.
+     *
+     * @return Lista de clientes sin pedidos ni pagos realizados
+     */
+    @GetMapping("/without-orders-and-payments")
+    public ResponseEntity<List<Customer>> getCustomersWithoutOrdersAndPayments() {
+        List<Customer> customers = customerService.getCustomersWithoutOrdersAndPayments();
+        return new ResponseEntity<>(customers, HttpStatus.OK);
+    }
+
+    @GetMapping("/unpaid-orders")
+    public ResponseEntity<List<Customer>> getCustomersWithUnpaidOrders() {
+        List<Customer> customers = customerService.findCustomersWithOrdersButNoPayments();
+        return ResponseEntity.ok(customers);
+    }
 }

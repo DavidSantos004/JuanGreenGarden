@@ -1,7 +1,10 @@
 package com.JuanGreenGarden.Gardening.web.controller;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
+import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -107,4 +110,50 @@ public class EmployeeController {
         List<EmployeeDTO> employees = employeeService.getEmployeesNotSalesRepresentatives();
         return new ResponseEntity<>(employees, HttpStatus.OK);
     } 
+
+    /**
+     * Obtiene una lista de empleados que no tienen una oficina asociada.
+     *
+     * @return Lista de empleados sin una oficina asociada
+     */
+    @GetMapping("/without-office")
+    public ResponseEntity<?> getEmployeesWithoutOffice() {
+        List<Employee> employees = employeeService.getEmployeesWithoutOffice();
+        if (employees.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron empleados sin una oficina asociada.");
+        } else {
+            return ResponseEntity.ok(employees);
+        }
+    }
+    
+    /**
+     * Obtiene una lista de empleados que no tienen clientes asociados.
+     * @return Lista de empleados sin clientes asociados.
+     */
+    @GetMapping("/without-customers")
+    public List<Employee> getEmployeesWithoutCustomers() {
+        return employeeService.getEmployeesWithoutCustomers();
+    }
+
+    /**
+     * Obtiene una lista de empleados que no tienen clientes asociados y tienen una oficina asignada.
+     *
+     * @return Lista de empleados sin clientes asociados y con una oficina asignada
+     */
+    @GetMapping("/without-customers-and-office")
+    public List<Employee> getEmployeesWithoutCustomersAndOffice() {
+        return employeeService.getEmployeesWithoutCustomersAndOffice();
+    }
+
+    /**
+     * Obtiene una lista de empleados que no tienen una oficina asociada ni un cliente asociado.
+     *
+     * @return Lista de empleados sin una oficina asociada ni un cliente asociado
+     */
+    @GetMapping("/without-office-and-customer")
+    public ResponseEntity<?> getEmployeesWithoutOfficeAndCustomer() {
+        return employeeService.getEmployeesWithoutOfficeAndCustomer();
+    }
+
+    
 }

@@ -8,6 +8,7 @@ public class EmployeeDTO {
     private String extension;
     private String email;
     private String jobTitle;
+    private String bossName; // Nuevo campo para el nombre del jefe asociado
 
 
     public Integer getEmployeeNumber() {
@@ -64,5 +65,13 @@ public class EmployeeDTO {
 
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
+    }
+
+    public String getBossName() {
+        return bossName;
+    }
+
+    public void setBossName(String bossName) {
+        this.bossName = bossName;
     }
 }

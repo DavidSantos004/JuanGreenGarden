@@ -29,4 +29,38 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer>{
      */
     List<Customer> findByCityAndEmployeeField_EmployeeNumberIn(String city, List<Integer> employeeNumbers);
 
+    
+/**
+     * Encuentra una lista de clientes que tienen pagos asociados.
+     *
+     * @return Lista de clientes con pagos asociados
+     */
+    List<Customer> findByCustomers2IsNotNull();
+
+
+    /**
+     * Encuentra una lista de clientes que **no** tienen pagos asociados.
+     *
+     * @return Lista de clientes sin pagos asociados
+     */
+    List<Customer> findByCustomers2IsNull();
+
+    
+    /**
+     * Encuentra una lista de clientes que **no** han realizado pedidos.
+     *
+     * @return Lista de clientes sin pedidos realizados
+     */
+    List<Customer> findByCustomersIsEmpty();
+
+    /**
+     * Encuentra una lista de clientes que no han realizado pedidos ni pagos.
+     *
+     * @return Lista de clientes sin pedidos ni pagos realizados
+     */
+    List<Customer> findByCustomersIsEmptyAndCustomers2IsEmpty();
+
+
+    List<Customer> findByCustomersIsNotNullAndCustomers2IsEmpty();
+
 }

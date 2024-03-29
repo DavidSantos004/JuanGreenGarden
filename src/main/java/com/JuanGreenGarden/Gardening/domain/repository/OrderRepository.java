@@ -46,5 +46,25 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
      */
     @Query("SELECT o FROM Order o WHERE MONTH(o.shippedDate) = 1")
     List<Order> findOrdersDeliveredInJanuary();
+
+    /**
+     * Busca los nombres de clientes con pedidos entregados tarde.
+     *
+     * @return Lista de nombres de clientes con pedidos entregados tarde.
+     */
+    @Query("SELECT DISTINCT o.customerField.customerName FROM Order o WHERE o.requiredDate < CURRENT_DATE AND o.shippedDate IS NULL")
+    List<String> findCustomersWithDelayedOrders();
+
+
+    /**
+     * Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.
+     *
+     * @return Lista de las diferentes gamas de producto que ha comprado cada cliente.
+     */
+    @Query("SELECT DISTINCT od.productField.productLineField.productLine " +
+           "FROM OrderDetail od " +
+           "INNER JOIN od.orderField o " +
+           "INNER JOIN o.customerField c")
+    List<String> findAllProductLinesByCustomers();
 }
 

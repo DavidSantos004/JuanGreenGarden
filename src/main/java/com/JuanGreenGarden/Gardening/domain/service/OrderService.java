@@ -78,5 +78,23 @@ public class OrderService {
     public List<Order> getOrdersDeliveredInJanuary() {
         return orderRepository.findOrdersDeliveredInJanuary();
     }
+
+    /**
+     * Busca los nombres de clientes con pedidos entregados tarde.
+     *
+     * @return Lista de nombres de clientes con pedidos entregados tarde.
+     */
+    public List<String> findCustomersWithDelayedOrders() {
+        return orderRepository.findCustomersWithDelayedOrders();
+    }
+
+    /**
+     * Devuelve un listado de las diferentes gamas de producto que ha comprado cada cliente.
+     *
+     * @return Lista de las diferentes gamas de producto que ha comprado cada cliente.
+     */
+    public List<String> findAllProductLinesByCustomers() {
+        return orderRepository.findAllProductLinesByCustomers();
+    }
 }
 

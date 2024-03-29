@@ -83,4 +83,16 @@ public class OfficeController {
         List<Object[]> offices = officeService.getOfficesInSpain();
         return new ResponseEntity<>(offices, HttpStatus.OK);
     }
+
+    /**
+     * Obtiene las direcciones de las oficinas que tienen clientes en Fuenlabrada.
+     * 
+     * @return Lista de direcciones de las oficinas con clientes en Fuenlabrada.
+     */
+    @GetMapping("/addresses-in-fuenlabrada")
+    public List<String> getOfficeAddressesWithCustomersInFuenlabrada() {
+        return officeService.getOfficeAddressesWithCustomersInFuenlabrada();
+    }
+    
+    
 }

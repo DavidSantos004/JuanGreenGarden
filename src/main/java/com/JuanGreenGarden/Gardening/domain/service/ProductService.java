@@ -54,4 +54,8 @@ public class ProductService {
         return productRepository.findByProductLineFieldProductLineAndQuantityInStockGreaterThan(productLine, quantityInStock);
     }
 
+    public List<Product> findProductsNotInOrders() {
+        return productRepository.findProductsNotInOrders();
+    }
+
 }
