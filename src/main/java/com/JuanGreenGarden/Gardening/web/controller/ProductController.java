@@ -70,9 +70,47 @@ public class ProductController {
     }
 
 
+    /**
+     * Obtiene los productos que no están incluidos en órdenes.
+     *
+     * @return ResponseEntity con la lista de productos que no están en órdenes.
+     */
     @GetMapping("/not-in-orders")
     public ResponseEntity<List<Product>> getProductsNotInOrders() {
         List<Product> products = productService.findProductsNotInOrders();
         return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+
+    /**
+     * Obtiene el precio de venta del producto más caro y más barato.
+     *
+     * @return Un ResponseEntity que contiene el producto más caro y el producto más barato.
+     */
+    @GetMapping("/precio-min-max")
+    public ResponseEntity<Product[]> findMinMaxProductPrice() {
+        Product[] minMaxPrices = productService.findMinMaxProductPrice();
+        return ResponseEntity.ok(minMaxPrices);
+    }
+
+    /**
+     * Obtiene los 20 productos más vendidos.
+     * @return ResponseEntity con la lista de los 20 productos más vendidos.
+     */
+    @GetMapping("/mas-vendidos")
+    public ResponseEntity<List<Object[]>> getTop20BestSellingProducts() {
+        List<Object[]> topProducts = productService.findTop20BestSellingProducts();
+        return ResponseEntity.ok(topProducts);
+    }
+
+    /**
+     * Encuentra los productos que no están presentes en ninguna orden y devuelve su nombre, descripción y imagen.
+     *
+     * @return ResponseEntity con una lista de productos que no están presentes en ninguna orden.
+     */
+    @GetMapping("/not-in-orders-name-descripcion-image")
+    public ResponseEntity<List<Product>> findProductsNotInOrders() {
+        List<Product> productsNotInOrders = productService.findProductsNotInOrders();
+        return ResponseEntity.ok(productsNotInOrders);
     }
 }

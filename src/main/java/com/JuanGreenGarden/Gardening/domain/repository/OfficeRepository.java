@@ -40,4 +40,15 @@ public interface OfficeRepository extends JpaRepository<Office, String> {
        "WHERE c.city = 'Fuenlabrada'")
     List<String> findOfficeAddressesWithCustomersInFuenlabrada();
 
+    /**
+     * Busca las oficinas donde no hay representantes de ventas para productos de la gama 'Frutales'.
+     *
+     * @return Lista de oficinas que no tienen representantes de ventas para productos de la gama 'Frutales'.
+     */
+    @Query("SELECT o FROM Office o WHERE o.officeCode NOT IN " +
+            "(SELECT e.officeField.officeCode FROM Employee e WHERE e.employeeNumber IN " +
+            "(SELECT c.employeeField.employeeNumber FROM Customer c WHERE c.customerNumber IN " +
+            "(SELECT od.orderField.customerField.customerNumber FROM OrderDetail od " +
+            "WHERE od.productField.productLineField.productLine = 'Frutales')))")
+    List<Office> findOfficesWhereNoSalesRepresentativesForFruitProducts();
 }

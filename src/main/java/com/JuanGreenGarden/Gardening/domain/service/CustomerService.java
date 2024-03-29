@@ -103,7 +103,91 @@ public class CustomerService {
         return customerRepository.findByCustomersIsEmptyAndCustomers2IsEmpty();
     }
 
+    /**
+     * Encuentra clientes con pedidos pero sin pagos.
+     *
+     * @return Lista de clientes que tienen pedidos pero no pagos.
+     */
     public List<Customer> findCustomersWithOrdersButNoPayments() {
         return customerRepository.findByCustomersIsNotNullAndCustomers2IsEmpty();
+    }
+
+    /**
+     * Cuenta la cantidad de clientes por país.
+     *
+     * @return Lista de arreglos de objetos donde cada arreglo contiene el nombre del país y la cantidad de clientes.
+     */
+    public List<Object[]> countCustomersByCountry() {
+        return customerRepository.countCustomersByCountry();
+    }
+
+    /**
+     * Calcula el número total de clientes.
+     *
+     * @return El número total de clientes.
+     */
+    public long countCustomers() {
+        return customerRepository.count();
+    }
+
+    /**
+     * Cuenta el número de clientes con domicilio en la ciudad de Madrid.
+     *
+     * @return El número de clientes con domicilio en la ciudad de Madrid.
+     */
+    public long countCustomersInMadrid() {
+        return customerRepository.countByCity("Madrid");
+    }
+
+    /**
+     * Calcula el número de clientes por ciudad que comienza con la letra "M".
+     *
+     * @return Lista de objetos Object[], donde el primer elemento es el nombre de la ciudad y el segundo elemento es el número de clientes en esa ciudad.
+     */
+    public List<Object[]> countCustomersByCityStartingWithM() {
+        return customerRepository.countCustomersByCityStartingWith("M");
+    }
+
+    /**
+     * Calcula el número de clientes que no tienen asignado un representante de ventas.
+     *
+     * @return El número de clientes sin representante de ventas asignado.
+     */
+    public long countCustomersWithoutSalesRepresentative() {
+        return customerRepository.countCustomersWithoutSalesRepresentative();
+    }
+
+    
+
+    /**
+     * Obtiene todos los clientes.
+     *
+     * @return Una lista de todos los clientes.
+     */
+    public List<Customer> getAllCustomerss() {
+        return customerRepository.findAll();
+    }
+
+
+    /**
+     * Obtiene el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes
+     * junto con la ciudad de la oficina a la que pertenece el representante.
+     * @return Lista de objetos que contienen el nombre del cliente, nombre del representante, apellido del representante
+     * y ciudad de la oficina.
+     */
+    public List<Object[]> findCustomersWithoutPaymentsAndRepresentatives() {
+        return customerRepository.findCustomersWithoutPaymentsAndRepresentatives();
+    }
+
+
+    /**
+     * Obtiene los nombres de los clientes y los representantes de ventas junto con la ciudad de la oficina
+     * a la que están asignados.
+     *
+     * @return Una lista de matrices de objetos que contienen el nombre del cliente, el nombre y apellido
+     * del representante de ventas, y la ciudad de la oficina.
+     */
+    public List<Object[]> getCustomerNamesAndRepresentativesWithOfficeCity() {
+        return customerRepository.getCustomerNamesAndRepresentativesWithOfficeCity();
     }
 }

@@ -146,6 +146,14 @@ public class OfficeService {
         return officeRepository.findOfficeAddressesWithCustomersInFuenlabrada();
     } 
 
+    /**
+     * Encuentra las oficinas donde no hay representantes de ventas para productos de la gama Frutales.
+     *
+     * @return Lista de oficinas donde no hay representantes de ventas para productos de la gama Frutales.
+     */
+    public List<Office> findOfficesWhereNoSalesRepresentativesForFruitProducts() {
+        return officeRepository.findOfficesWhereNoSalesRepresentativesForFruitProducts();
+    }
    
 
 }

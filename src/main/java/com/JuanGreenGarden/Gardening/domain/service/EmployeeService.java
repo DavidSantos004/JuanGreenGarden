@@ -118,5 +118,47 @@ public class EmployeeService {
         }
     }
 
-    
+/**
+     * Método para obtener el número total de empleados en la compañía.
+     *
+     * @return El número total de empleados.
+     */    public long getTotalEmployees() {
+        return employeeRepository.count();
+    }
+
+     /**
+     * Recupera el nombre de los representantes de ventas y el número de clientes que atiende cada uno.
+     * 
+     * @return Una lista de arrays de objetos donde cada array contiene el nombre del representante de ventas y el número de clientes que atiende.
+     */
+    public List<Object[]> countCustomersBySalesRepresentative() {
+        return employeeRepository.countCustomersBySalesRepresentative();
+    }
+
+    /**
+     * Obtiene los nombres de los empleados y sus jefes directos.
+     *
+     * @return Lista de matrices de objetos que contienen los nombres de los empleados y sus jefes directos.
+     */
+    public List<Object[]> getEmployeeNamesAndBossNames() {
+        return employeeRepository.getEmployeeNamesAndBossNames();
+    }
+
+    /**
+     * Obtiene los nombres de los empleados, sus jefes y sus jefes superiores.
+     *
+     * @return Lista de matrices de objetos que contienen los nombres de los empleados, sus jefes y sus jefes superiores.
+     */
+    public List<Object[]> getEmployeeNamesAndBossesAndGrandBosses() {
+        return employeeRepository.getEmployeeNamesAndBossesAndGrandBosses();
+    }
+
+    /**
+     * Encuentra los empleados que no tienen clientes asociados.
+     *
+     * @return Lista de empleados sin clientes asociados.
+     */
+    public List<Employee> findEmployeesWithoutCustomers() {
+        return employeeRepository.findEmployeesWithoutCustomers();
+    }
 }

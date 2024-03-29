@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -155,5 +156,60 @@ public class EmployeeController {
         return employeeService.getEmployeesWithoutOfficeAndCustomer();
     }
 
-    
+/**
+     * Endpoint para obtener el número total de empleados en la compañía.
+     *
+     * @return El número total de empleados.
+     */    
+    @GetMapping("/count-employees")
+    public long getTotalEmployees() {
+        return employeeService.getTotalEmployees();
+    }
+
+    /**
+     * Recupera el nombre de los representantes de ventas y el número de clientes que atiende cada uno.
+     * 
+     * @return Una respuesta HTTP que contiene una lista de arrays de objetos donde cada array contiene el nombre del representante de ventas y el número de clientes que atiende.
+     */
+    @GetMapping("/count-customers-by-sales-representative")
+    public ResponseEntity<List<Object[]>> countCustomersBySalesRepresentative() {
+        List<Object[]> salesRepresentativeCounts = employeeService.countCustomersBySalesRepresentative();
+        return new ResponseEntity<>(salesRepresentativeCounts, HttpStatus.OK);
+    }
+
+    /**
+     * Obtiene los nombres de los empleados y sus jefes.
+     *
+     * @return ResponseEntity con una lista de arrays de objetos que contienen los nombres de los empleados y sus jefes.
+     */
+    @GetMapping("/names-and-bosses")
+    public ResponseEntity<List<Object[]>> getEmployeeNamesAndBossNames() {
+        List<Object[]> employeeNamesAndBossNames = employeeService.getEmployeeNamesAndBossNames();
+        return ResponseEntity.ok(employeeNamesAndBossNames);
+    }
+
+    /**
+     * Obtiene los nombres de los empleados, sus jefes y sus jefes superiores.
+     *
+     * @return ResponseEntity con una lista de arrays de objetos que contienen los nombres de los empleados, sus jefes y sus jefes superiores.
+     */
+    @GetMapping("/names-bosses-grandbosses")
+    public ResponseEntity<List<Object[]>> getEmployeeNamesAndBossesAndGrandBosses() {
+        List<Object[]> employeeNamesAndBossesAndGrandBosses = employeeService.getEmployeeNamesAndBossesAndGrandBosses();
+        return ResponseEntity.ok(employeeNamesAndBossesAndGrandBosses);
+    }
+
+    /**
+     * Encuentra los empleados que no tienen clientes asociados.
+     *
+     * @return ResponseEntity con una lista de DTO de empleados que no tienen clientes asociados.
+     */
+    @GetMapping("/without-customers-nameBooses")
+    public ResponseEntity<List<EmployeeDTO>> findEmployeesWithoutCustomers() {
+        List<Employee> employees = employeeService.findEmployeesWithoutCustomers();
+        List<EmployeeDTO> employeeDTOs = employees.stream()
+                .map(Employee::toDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(employeeDTOs);
+    }
 }

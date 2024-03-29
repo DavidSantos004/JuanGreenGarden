@@ -94,5 +94,14 @@ public class OfficeController {
         return officeService.getOfficeAddressesWithCustomersInFuenlabrada();
     }
     
-    
+    /**
+     * Encuentra las oficinas donde no hay representantes de ventas para productos de frutas.
+     *
+     * @return ResponseEntity con una lista de oficinas que no tienen representantes de ventas para productos de frutas.
+     */
+    @GetMapping("/no-sales-representatives-for-fruit-products")
+    public ResponseEntity<List<Office>> findOfficesWhereNoSalesRepresentativesForFruitProducts() {
+        List<Office> offices = officeService.findOfficesWhereNoSalesRepresentativesForFruitProducts();
+        return ResponseEntity.ok(offices);
+    }
 }

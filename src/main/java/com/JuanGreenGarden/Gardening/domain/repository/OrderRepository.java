@@ -66,5 +66,13 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
            "INNER JOIN od.orderField o " +
            "INNER JOIN o.customerField c")
     List<String> findAllProductLinesByCustomers();
+
+    /**
+     * Cuenta el número de pedidos para cada estado.
+     *
+     * @return Una lista de arreglos donde cada arreglo contiene el estado y la cantidad de pedidos para ese estado.
+     */
+    @Query("SELECT o.status, COUNT(o) AS total FROM Order o GROUP BY o.status ORDER BY total DESC")
+    List<Object[]> countOrdersByStatus();
 }
 

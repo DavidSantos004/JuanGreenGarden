@@ -96,5 +96,15 @@ public class OrderService {
     public List<String> findAllProductLinesByCustomers() {
         return orderRepository.findAllProductLinesByCustomers();
     }
+
+    /**
+     * Recupera el número de pedidos para cada estado.
+     *
+     * @return Una lista de arreglos donde cada arreglo contiene el estado y la cantidad de pedidos para ese estado.
+     */
+    public List<Object[]> countOrdersByStatus() {
+        return orderRepository.countOrdersByStatus();
+    }
+
 }
 

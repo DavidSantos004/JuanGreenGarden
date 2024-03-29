@@ -1,5 +1,6 @@
 package com.JuanGreenGarden.Gardening.web.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,12 +16,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.JuanGreenGarden.Gardening.domain.Exceptions.DifferentDataTypeException;
 import com.JuanGreenGarden.Gardening.domain.Exceptions.InvalidIdFormatException;
 import com.JuanGreenGarden.Gardening.domain.Exceptions.NotFoundEndPoint;
 import com.JuanGreenGarden.Gardening.domain.service.CustomerService;
 import com.JuanGreenGarden.Gardening.persistence.entity.Customer;
+import com.JuanGreenGarden.Gardening.persistence.entity.CustomerRepresentativeOfficeDTO;
+import com.JuanGreenGarden.Gardening.persistence.entity.CustomerSalesRepDTO;
 import com.JuanGreenGarden.Gardening.persistence.entity.DTO.CustomerDTO;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -135,9 +139,121 @@ public class CustomerController {
         return new ResponseEntity<>(customers, HttpStatus.OK);
     }
 
+    /**
+     * Obtiene clientes con pedidos no pagados.
+     *
+     * @return Respuesta HTTP con la lista de clientes.
+     */
     @GetMapping("/unpaid-orders")
     public ResponseEntity<List<Customer>> getCustomersWithUnpaidOrders() {
         List<Customer> customers = customerService.findCustomersWithOrdersButNoPayments();
         return ResponseEntity.ok(customers);
+    }
+
+
+    /**
+     * Obtiene la cantidad de clientes por país.
+     *
+     * @return Respuesta HTTP con la lista de arreglos de objetos donde cada arreglo contiene el nombre del país y la cantidad de clientes.
+     */
+    @GetMapping("/count-by-country")
+    public ResponseEntity<List<Object[]>> countCustomersByCountry() {
+        List<Object[]> customerCountsByCountry = customerService.countCustomersByCountry();
+        return ResponseEntity.ok(customerCountsByCountry);
+    }
+
+    /**
+     * Obtiene el número total de clientes.
+     *
+     * @return La respuesta HTTP con el número total de clientes.
+     */
+    @GetMapping("/count-customers")
+    public ResponseEntity<Long> getCustomerCount() {
+        long customerCount = customerService.countCustomers();
+        return new ResponseEntity<>(customerCount, HttpStatus.OK);
+    }
+
+    /**
+     * Obtiene el número de clientes con domicilio en la ciudad de Madrid.
+     *
+     * @return La respuesta HTTP con el número de clientes en Madrid.
+     */
+    @GetMapping("/count-customers-madrid")
+    public ResponseEntity<Long> getCustomerCountInMadrid() {
+        long customerCount = customerService.countCustomersInMadrid();
+        return new ResponseEntity<>(customerCount, HttpStatus.OK);
+    }
+
+    /**
+     * Obtiene el número de clientes por ciudad que comienza con la letra "M".
+     *
+     * @return La respuesta HTTP con la lista de ciudades y el número de clientes en cada una.
+     */
+    @GetMapping("/count-by-city-starting-with-m")
+    public ResponseEntity<List<Object[]>> getCustomerCountByCityStartingWithM() {
+        List<Object[]> customerCounts = customerService.countCustomersByCityStartingWithM();
+        return new ResponseEntity<>(customerCounts, HttpStatus.OK);
+    }
+
+    /**
+     * Endpoint para obtener el número de clientes que no tienen asignado un representante de ventas.
+     *
+     * @return El número de clientes sin representante de ventas asignado.
+     */
+    @GetMapping("/count-without-sales-representative")
+    public ResponseEntity<Long> countCustomersWithoutSalesRepresentative() {
+        long count = customerService.countCustomersWithoutSalesRepresentative();
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+
+
+    /**
+     * Obtiene la lista de clientes junto con la información de sus representantes de ventas.
+     *
+     * @return ResponseEntity con la lista de objetos DTO que contienen la información del cliente
+     * y su representante de ventas, en caso de éxito (código de estado 200 OK).
+     */
+    @GetMapping("/sales-representatives")
+    public ResponseEntity<List<CustomerSalesRepDTO>> getCustomersWithSalesRepresentatives() {
+        List<Customer> customers = customerService.getAllCustomerss();
+        List<CustomerSalesRepDTO> customerSalesRepDTOs = CustomerSalesRepDTO.fromCustomers(customers);
+        return ResponseEntity.ok(customerSalesRepDTOs);
+    }
+
+    /**
+     * Obtiene el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes
+     * junto con la ciudad de la oficina a la que pertenece el representante.
+     * @return Respuesta HTTP con la lista de objetos que contienen el nombre del cliente, nombre del representante,
+     * apellido del representante y ciudad de la oficina.
+     */
+    @GetMapping("/without-payments-with-city-sales-representative")
+    public ResponseEntity<List<Object[]>> getCustomersWithoutPaymentsAndRepresentatives() {
+        List<Object[]> result = customerService.findCustomersWithoutPaymentsAndRepresentatives();
+        return ResponseEntity.ok(result);
+    }
+
+    /**
+     * Obtiene la lista de nombres de clientes junto con la información de sus representantes de ventas
+     * y la ciudad de la oficina del representante.
+     *
+     * @return ResponseEntity con la lista de objetos DTO que contienen el nombre del cliente, el nombre
+     * y apellido del representante de ventas, y la ciudad de la oficina del representante, en caso de éxito
+     * (código de estado 200 OK).
+     */
+    @GetMapping("/names-representatives-customers-city")
+    public ResponseEntity<List<CustomerRepresentativeOfficeDTO>> getCustomerNamesAndRepresentativesWithOfficeCity() {
+        List<Object[]> results = customerService.getCustomerNamesAndRepresentativesWithOfficeCity();
+        List<CustomerRepresentativeOfficeDTO> dtos = new ArrayList<>();
+
+        for (Object[] result : results) {
+            CustomerRepresentativeOfficeDTO dto = new CustomerRepresentativeOfficeDTO();
+            dto.setCustomerName((String) result[0]);
+            dto.setRepresentativeFirstName((String) result[1]);
+            dto.setRepresentativeLastName((String) result[2]);
+            dto.setRepresentativeOfficeCity((String) result[3]);
+            dtos.add(dto);
+        }
+
+        return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 }

@@ -140,4 +140,15 @@ public class OrderController {
         List<String> productLines = orderService.findAllProductLinesByCustomers();
         return new ResponseEntity<>(productLines, HttpStatus.OK);
     }
+
+    /**
+     * Recupera el número de pedidos para cada estado.
+     *
+     * @return Un ResponseEntity que contiene una lista de arreglos donde cada arreglo contiene el estado y la cantidad de pedidos para ese estado.
+     */
+    @GetMapping("/status-count")
+    public ResponseEntity<List<Object[]>> countOrdersByStatus() {
+        List<Object[]> ordersByStatus = orderService.countOrdersByStatus();
+        return ResponseEntity.ok(ordersByStatus);
+    }
 }

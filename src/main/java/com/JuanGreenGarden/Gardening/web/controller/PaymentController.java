@@ -1,5 +1,6 @@
 package com.JuanGreenGarden.Gardening.web.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.JuanGreenGarden.Gardening.domain.Exceptions.DifferentDataTypeException;
@@ -102,5 +104,50 @@ public class PaymentController {
     public List<String> findAllPaymentMethods() {
         return paymentService.findAllPaymentMethods();
     }
+
+    /**
+     * Obtiene el pago medio para el año fijo 2009.
+     * 
+     * @return ResponseEntity con el pago medio para el año 2009.
+     */
+    @GetMapping("/average-2009")
+    public ResponseEntity<String> getAveragePaymentForFixedYear() {
+        int fixedYear = 2009; 
+        BigDecimal average = paymentService.calculateAveragePaymentForYear(fixedYear);
+        return ResponseEntity.ok("The average payment in the year " + fixedYear + " it was of: " + average.toString());
+    }
+
+    /**
+     * Endpoint para obtener la fecha del primer y último pago realizado por cada cliente.
+     *
+     * @return Lista de arrays de objetos que contienen el nombre y apellidos del cliente, así como la fecha del primer y último pago.
+     */
+    @GetMapping("/first-and-last-payment-dates-for-customers")
+    public ResponseEntity<List<Object[]>> findFirstAndLastPaymentDatesForCustomers() {
+        List<Object[]> paymentDates = paymentService.findFirstAndLastPaymentDatesForCustomers();
+        return new ResponseEntity<>(paymentDates, HttpStatus.OK);
+    }
+
+    /**
+     * Obtiene la suma total de los pagos agrupados por año.
+     * @return ResponseEntity con la lista de arreglos de objetos, donde cada arreglo contiene el año y la suma total de pagos para ese año.
+     */
+    @GetMapping("/total-by-year")
+    public ResponseEntity<List<Object[]>> getTotalPaymentsByYear() {
+        List<Object[]> totalPaymentsByYear = paymentService.findTotalPaymentsByYear();
+        return ResponseEntity.ok(totalPaymentsByYear);
+    }
     
+
+    /**
+     * Obtiene el nombre de los clientes que han hecho pagos y el nombre de sus representantes
+     * junto con la ciudad de la oficina a la que pertenece el representante.
+     * @return Respuesta HTTP con la lista de objetos que contienen el nombre del cliente, nombre del representante,
+     * apellido del representante y ciudad de la oficina.
+     */
+    @GetMapping("/customer-representative-city")
+    public ResponseEntity<List<Object[]>> getCustomerPaymentsAndRepresentatives() {
+        List<Object[]> result = paymentService.findCustomerPaymentsAndRepresentatives();
+        return ResponseEntity.ok(result);
+    }
 }
