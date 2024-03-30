@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   linkQueries.addEventListener("click", function(event) {
     event.preventDefault(); // Previene el comportamiento predeterminado del enlace
-    
-    
 
     // Muestra u oculta el contenedor dependiendo de su estado actual
     if (container.style.display === "none") {
@@ -17,16 +15,34 @@ document.addEventListener("DOMContentLoaded", function() {
       container.style.display = "none";
     }
   });
+
+  // Llama a la función para generar las tarjetas de las diferentes entidades cuando se hace clic en el enlace de "Queries"
+  linkQueries.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    container.innerHTML = "";
+
+    // Genera tarjetas para las entidades especificadas con IDs únicos basados en la entidad
+    generateEntityCards("Customer", "customerCard", "pages/customerQueries.html");
+    generateEntityCards("Employee", "employeeCard", "employeeQueries.html");
+    generateEntityCards("Office", "officeCard", "officeQueries.html");
+    generateEntityCards("Order", "orderCard", "orderQueries.html");
+    generateEntityCards("OrderDetail", "orderDetailCard", "orderDetailQueries.html");
+    generateEntityCards("Payment", "paymentCard", "paymentQueries.html");
+    generateEntityCards("Product", "productCard", "productQueries.html");
+    generateEntityCards("ProductLine", "productLineCard", "productLineQueries.html");
+  });
 });
 
-// Función para generar las tarjetas de las diferentes entidades
-function generateEntityCards(entityName) {
+// Función para generar las tarjetas de las diferentes entidades con IDs únicos
+function generateEntityCards(entityName, entityId, destinationLink) {
   const container = document.querySelector(".cards-container");
 
   const cardLink = document.createElement("a");
-  cardLink.href = "#"; // Enlace de destino (debe actualizarse)
+  cardLink.href = destinationLink; // Establecer el enlace de destino
   cardLink.classList.add("card-link");
   cardLink.style.margin = "40px";
+  cardLink.id = entityId; // Asignar ID único a la tarjeta
 
   const card = document.createElement("div");
   card.classList.add("card");
@@ -70,24 +86,27 @@ function generateEntityCards(entityName) {
   setTimeout(() => {
       cardLink.style.opacity = "1";
   }, 100); // Retraso pequeño para permitir que se aplique la transición
+
+  // Agregar evento de escucha a la tarjeta recién creada
+  cardLink.addEventListener("click", function(event) {
+    console.log(`Soy una card de ${entityName}`);
+  });
 }
 
 // Llama a la función para generar las tarjetas de las diferentes entidades cuando se hace clic en el enlace de "Queries"
 document.querySelector(".icon").addEventListener("click", function(event) {
-  event.preventDefault();
 
   console.log("aaaaaaa");
   const container = document.querySelector(".cards-container");
   container.innerHTML = "";
 
-  // Genera tarjetas para las entidades especificadas
-  generateEntityCards("Customer")
-  generateEntityCards("Employee");
-  generateEntityCards("Office");
-  generateEntityCards("Order");
-  generateEntityCards("OrderDetail");
-  generateEntityCards("Payment");
-  generateEntityCards("Product");
-  generateEntityCards("ProductLine");
+  // Genera tarjetas para las entidades especificadas con IDs únicos basados en la entidad
+  generateEntityCards("Customer", "customerCard");
+  generateEntityCards("Employee", "employeeCard");
+  generateEntityCards("Office", "officeCard");
+  generateEntityCards("Order", "orderCard");
+  generateEntityCards("OrderDetail", "orderDetailCard");
+  generateEntityCards("Payment", "paymentCard");
+  generateEntityCards("Product", "productCard");
+  generateEntityCards("ProductLine", "productLineCard");
 });
-

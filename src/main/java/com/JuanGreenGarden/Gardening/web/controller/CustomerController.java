@@ -248,8 +248,8 @@ public class CustomerController {
         for (Object[] result : results) {
             CustomerRepresentativeOfficeDTO dto = new CustomerRepresentativeOfficeDTO();
             dto.setCustomerName((String) result[0]);
-            dto.setRepresentativeFirstName((String) result[1]);
-            dto.setRepresentativeLastName((String) result[2]);
+            dto.setRepresentativeFirstName(String.valueOf(result[1])); // Convertir a String
+            dto.setRepresentativeLastName(String.valueOf(result[2]));  // Convertir a String
             dto.setRepresentativeOfficeCity((String) result[3]);
             dtos.add(dto);
         }

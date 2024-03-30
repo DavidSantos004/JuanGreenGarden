@@ -24,12 +24,13 @@
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Dosis:400,500|Poppins:400,600,700&display=swap" rel="stylesheet">
   <!-- Custom styles for this template -->
-  <link href="/frontend/css/style.css" rel="stylesheet" />
+  <link href="/frontend/css/styleQueries.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="/frontend/css/responsive.css" rel="stylesheet" />
 
-  <link rel="stylesheet" href="/frontend/css/cards.css">
+  <link rel="stylesheet" href="/frontend/css/stylesCards.css">
   <link rel="stylesheet" href="/frontend/css/buttons.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -90,21 +91,16 @@
     <section class=" slider_section position-relative">
 
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active">01</li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1">02</li>
-        </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
             <div class="row">
-              
               <div class="col-md-3 offset-md-2" style="margin-left: 0;" >
                 <div class="slider_detail">
                   <h1>
-                    JuanGreenGarden
+                    Queries
                     
                     <span>
-                      SpringBoot Proyect
+                       Customer
                       
                     </span>
                   </h1>
@@ -151,14 +147,7 @@
             </div>
           </div>
         </div>
-        <div class="carousel_btn-container">
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
+        
       </div>
 
     </section>
@@ -171,62 +160,106 @@
   <section class="about_section layout_padding" id="queries">
     <div class="container">
       <h2>
-        ENTITIES TO WHICH CONSULTATIONS ARE MADE
+        CUSTOMER TABLE QUERIES
       </h2>
       <p>
-        Here you can see all the queries for each entity/table and choose which one you want to select
+        Select the query you want to see
       </p>
     
-      <h4>Click on the sheet</h4>
-      <button class="Btn" style="
-        transform: rotate(180deg);
-        ">
-        <svg height="1.2em" class="arrow" viewBox="0 0 512 512"><path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"></path></svg>
-      </button>
-      
-      <div class="tooltip-container" style="
-      margin-top: 15%;
-      margin-bottom: 5%;
-      display: flex;
-      justify-content: center;
-  ">
-        <div class="tooltip">
-          <div class="text-tooltip" style="
-          z-index: 2;
-          font-size: 22px;
-          color: #3f5641;
-          font-weight: bolder;
-          margin: auto;
-          width: fit-content;
-          padding-top: 25px;
-          filter: drop-shadow(0px 0px 3px #fff);
-      ">Queries</div>
-      
-          <div class="leaf leaf1"></div>
-          <div class="leaf leaf2"></div>
-          <div class="leaf leaf3"></div>
-          <div class="leaf leaf4"></div>
+      <div class="table" id="customers_table">
+
+      <section class="table__header">
+        <h1>Customer Queries</h1>
+        <div class="input-group">
+            <input type="search" placeholder="Search Querie...">
         </div>
-        <div class="leaf icon"></div>
-      </div>
-
-      
-    </div>
-
-
-
-
-
-
-
-    <div class="wrapper" id="wrapper">
-      
-
-      <div class="cards-container" style="display: none;">
+    </section>
+    <section class="table__body">
+        <table>
+            <thead>
+                <tr>
+                    <th> Customer <span class="icon-arrow">&UpArrow;</span></th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="#consulta1" style="color: black; text-decoration: none;" onclick="consultarClientes()">Obtiene todos los clientes.</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#consulta2" style="color: black; text-decoration: none;">Obtiene un cliente por su ID.</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#consulta3" style="color: black; text-decoration: none;"  onclick="consultarClientesEspañoles()">Obtiene clientes españoles.</a></td>                       
+                </tr>
+                <tr>
+                    <td><a href="#consulta4" style="color: black; text-decoration: none;" onclick="consultarClientesEnMadridConRepresentanteDeVentas()">Obtiene clientes en Madrid con representantes de ventas.</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#consulta5" style="color: black; text-decoration: none;" onclick="consultarClientesConPagos()">Obtiene una lista de clientes que han realizado pagos.</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#consulta6" style="color: black; text-decoration: none;" onclick="consultarClientesSinPagos()">Obtiene una lista de clientes que no han realizado pagos.</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#consulta7" style="color: black; text-decoration: none;" onclick="consultarClientesSinPedidos()">Obtiene una lista de clientes que no han realizado pedidos.</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#consulta8" style="color: black; text-decoration: none;" onclick="consultarClientesSinPedidosYPagos()">Obtiene una lista de clientes que no han realizado pedidos ni pagos.</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#consulta9" style="color: black; text-decoration: none;" onclick="consultarClientesConPedidosNoPagados()">Obtiene clientes con pedidos no pagados.</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#consulta10" style="color: black; text-decoration: none;" onclick="consultarCantidadClientesPorPais()">Obtiene la cantidad de clientes por país.</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#consulta11" style="color: black; text-decoration: none;" onclick="consultarNumeroTotalClientes()">Obtiene el número total de clientes.</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#consulta12" style="color: black; text-decoration: none;" onclick="consultarNumeroClientesEnMadrid()">Obtiene el número de clientes con domicilio en la ciudad de Madrid.</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#consulta13" style="color: black; text-decoration: none;" onclick="consultarClientesPorCiudadQueEmpiezaConM()">Obtiene el número de clientes por ciudad que comienza con la letra "M".</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#consulta14" style="color: black; text-decoration: none;" onclick="consultarClientesSinRepresentanteDeVentas()">Obtiene el número de clientes que no tienen asignado un representante de ventas.</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#consulta15" style="color: black; text-decoration: none;" onclick="consultarClientesConRepresentantesDeVentas()">Obtiene la lista de clientes junto con la información de sus representantes de ventas.</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#consulta16" style="color: black; text-decoration: none;" onclick="consultarClientesSinPagosConRepresentantes()">Obtiene el nombre de los clientes que no hayan hecho pagos y el nombre de sus representantes junto con la ciudad de la oficina a la que pertenece el representante.</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#consulta17" style="color: black; text-decoration: none;" onclick="consultarNombresClientesConRepresentantes()">Obtiene la lista de nombres de clientes junto con la información de sus representantes de ventas y la ciudad de la oficina del representante.</a></td>
+                </tr>
+            </tbody>
             
-      </div>
-  
+        </table>
+
+    </section>
+</div>
+
+<div id="resultados" class="cards" style="display: none;">
+    <div class="card green">
+        <p class="tip">Hover Me</p>
+        <p class="second-text">Lorem Ipsum</p>
     </div>
+</div>
+
+<!-- <div id="resultados"></div> -->
+
+    </div>
+
+ 
+
+
+
+
+
+
+   
   </section>
 
   <!-- end about section -->
@@ -453,7 +486,7 @@
 
   <script type="text/javascript" src="/frontend/js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="/frontend/js/bootstrap.js"></script>
-  <script src="/frontend/js/cards.js"></script>
+  <script src="/frontend/js/tables.js"></script>
   <script src="/frontend/js/customerCard.js"></script>
 
 

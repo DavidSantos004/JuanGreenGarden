@@ -74,7 +74,7 @@ public class Customer {
     @OneToMany(mappedBy = "customerField2", fetch = FetchType.EAGER)
     private List<Payment> customers2;
 
-    @JsonIgnore
+    
     @ManyToOne
     @JoinColumn(name = "codigo_empleado_rep_ventas")
     private Employee employeeField;

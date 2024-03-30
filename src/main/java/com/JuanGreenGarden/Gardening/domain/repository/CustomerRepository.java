@@ -137,9 +137,10 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer>{
      * @return Una lista de matrices de objetos que contienen el nombre del cliente, el nombre y apellido
      * del representante de ventas, y la ciudad de la oficina.
      */
-    @Query("SELECT c.customerName, e.firstName, e.lastName1, o.city " +
+    @Query("SELECT c.customerName, e.employeeNumber, e.lastName1, o.city " +
     "FROM Customer c " +
     "JOIN c.employeeField e " +
-    "JOIN e.officeField o")
+    "JOIN e.officeField o " +
+    "WHERE c.city = 'Madrid'")
     List<Object[]> getCustomerNamesAndRepresentativesWithOfficeCity();
 }

@@ -1,0 +1,45 @@
+.cards {
+    margin-top: 5rem;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cards .green {
+    background-color: #22c55e;
+}
+
+.cards .card {
+    display: flex;
+    align-items: flex-start; /* Alinear el contenido desde arriba */
+    justify-content: center;
+    flex-direction: column;
+    text-align: left; /* Alinear el texto a la izquierda */
+    width: 250px; /* Ancho inicial, ajusta según sea necesario */
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: 400ms;
+    padding: 15px; /* Aumentar el padding */
+}
+
+.cards .card p.tip {
+    font-size: 1em;
+    font-weight: 700;
+    margin-bottom: 5px; /* Añadir margen inferior entre los elementos */
+}
+
+.cards .card p.second-text {
+    font-size: .7em;
+    margin-bottom: 5px; /* Añadir margen inferior entre los elementos */
+}
+
+.cards .card:hover {
+    transform: scale(1.1, 1.1);
+}
+
+.cards:hover > .card:not(:hover) {
+    filter: blur(10px);
+    transform: scale(0.9, 0.9);
+}
