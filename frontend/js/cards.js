@@ -24,13 +24,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Genera tarjetas para las entidades especificadas con IDs únicos basados en la entidad
     generateEntityCards("Customer", "customerCard", "pages/customerQueries.html");
-    generateEntityCards("Employee", "employeeCard", "employeeQueries.html");
-    generateEntityCards("Office", "officeCard", "officeQueries.html");
-    generateEntityCards("Order", "orderCard", "orderQueries.html");
-    generateEntityCards("OrderDetail", "orderDetailCard", "orderDetailQueries.html");
-    generateEntityCards("Payment", "paymentCard", "paymentQueries.html");
-    generateEntityCards("Product", "productCard", "productQueries.html");
-    generateEntityCards("ProductLine", "productLineCard", "productLineQueries.html");
+    generateEntityCards("Employee", "employeeCard", "pages/employeeQueries.html");
+    generateEntityCards("Office", "officeCard", "pages/officeQueries.html");
+    generateEntityCards("Order", "orderCard", "pages/orderQueries.html");
+    generateEntityCards("OrderDetail", "orderDetailCard", "pages/orderDetailQueries.html");
+    generateEntityCards("Payment", "paymentCard", "pages/paymentQueries.html");
+    generateEntityCards("Product", "productCard", "pages/productQueries.html");
+    generateEntityCards("ProductLine", "productLineCard", "pages/productLineQueries.html");
   });
 });
 

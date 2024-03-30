@@ -156,7 +156,7 @@ public class EmployeeController {
         return employeeService.getEmployeesWithoutOfficeAndCustomer();
     }
 
-/**
+    /**
      * Endpoint para obtener el número total de empleados en la compañía.
      *
      * @return El número total de empleados.
