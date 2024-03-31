@@ -1,6 +1,14 @@
 # JUAN GREEN GARDEN
 
-![Texto](/readme/videoDemo.gif)
+![Texto](/readme/web/img_%20(4).png)
+
+## Canva Slides
+
+![Canva](/readme/web/canva.png)
+
+[<<< Go to Canva >>>](https://www.canva.com/design/DAGBBig-gVM/6NbJrNKyqOj712aN3KMehw/edit?utm_content=DAGBBig-gVM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
+
 
 ## Introduction
 Juan Green Garden is a website where you can make a series of queries to the database through an API developed in Java with Spring Boot.
@@ -17,7 +25,7 @@ Juan Green Garden is a website where you can make a series of queries to the dat
 
 
 ## Usage
-### To use and run the project in a better way we recommend you have installed an IDE such as IntelliJ or VSCODE.
+### To use and run the project in a better way we recommend you have installed an IDE such as IntelliJ or VSCode.
 
 1. Clone the repository.
 
@@ -28,7 +36,7 @@ Juan Green Garden is a website where you can make a series of queries to the dat
 
 3. Change the  `application.properties` if you have modified your PostgreSQL properties like host, port, username, or password.
 
-4. use the software
+4. Use the software
 
 ## Database
 
@@ -106,20 +114,35 @@ This structure allows for managing offices, employees, customers, products, orde
 - **URL:** http://localhost:8080/customers
 - **Description:** Return a list with the names of all Spanish clients.
 
-### Return a list with the client code of those clients who made some payment in 2008.
-- **URL:** http://localhost:8080/customers/clients-from-country/{country}
-- **Description:** Return a list with the client code of those clients who made some payment in 2008. Keep in mind that you should remove any repeated client codes.
 
 
 
 
-## Backend
+## Class Diagram UML
 
-### Description
-The backend of this project developed in Spring Boot acts as the central engine that handles business logic and data management.
+* Controller: 
+![photo](/readme/uml/Controller.png)
 
-### Class Diagram
-- [Class Diagram](link_to_diagram)
+* Entity: 
+![photo](/readme/uml/Entity.png)
+
+* DTO: 
+![photo](/readme/uml/DTO.png)
+
+* Exceptions: 
+![photo](/readme/uml/Exceptions.png)
+
+* Repository: 
+![photo](/readme/uml/Repository.png)
+
+* Security: 
+![photo](/readme/uml/Security.png)
+
+* Service: 
+![photo](/readme/uml/Service.png)
+
+<!-- * Complete UML:  -->
+<!-- ![photo](/readme/uml/TodoUML.png) -->
 
 
 
@@ -140,4 +163,3 @@ The backend of this project developed in Spring Boot acts as the central engine 
 ![image](/readme/web/img_%20(2).png)
 ![image](/readme/web/img_%20(7).png)
 
-## Functionalities
