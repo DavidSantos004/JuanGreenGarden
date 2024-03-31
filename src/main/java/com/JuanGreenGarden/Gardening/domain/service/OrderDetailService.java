@@ -1,6 +1,7 @@
 package com.JuanGreenGarden.Gardening.domain.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.JuanGreenGarden.Gardening.domain.repository.OrderDetailRepository;
+import com.JuanGreenGarden.Gardening.persistence.entity.BillingSummary;
 import com.JuanGreenGarden.Gardening.persistence.entity.OrderDetail;
 import com.JuanGreenGarden.Gardening.persistence.entity.OrderDetailId;
 import com.JuanGreenGarden.Gardening.persistence.entity.DTO.OrderDetailDTO;
@@ -161,7 +163,7 @@ public class OrderDetailService {
         return totalFacturadoPorProducto;
     }
     
-    /**
+   /**
      * Calcula la base imponible total para los productos cuyo código comienza con "OR".
      * @return La base imponible total de los productos filtrados.
      */
@@ -176,6 +178,9 @@ public class OrderDetailService {
 
         return baseImponible;
     }
+
+    // Implementa otros métodos para calcular el IVA y el total facturado según sea necesario
+
 
     /**
      * Calcula el monto del IVA para los productos filtrados.

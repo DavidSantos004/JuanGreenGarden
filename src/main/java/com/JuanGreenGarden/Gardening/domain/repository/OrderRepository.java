@@ -20,15 +20,17 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
      * 
      * @return Una lista de arrays de objetos que contienen el número de orden, número de cliente, fecha requerida y fecha de envío de las órdenes retrasadas.
      */
-    @Query("SELECT o.orderNumber, o.customerField.customerNumber, o.requiredDate, o.shippedDate FROM Order o WHERE o.status <> 'Shipped' AND o.requiredDate < CURRENT_DATE")
-    List<Object[]> findDelayedOrders();
+
+     @Query("SELECT o.orderNumber, o.customerField.customerNumber, o.requiredDate, o.shippedDate FROM Order o WHERE o.status <> 'Shipped' AND o.requiredDate < CURRENT_DATE AND o.shippedDate > o.requiredDate")
+     List<Object[]> findDelayedOrders();
+     
 
     /**
      * Encuentra las órdenes entregadas antes de tiempo.
      * 
      * @return Una lista de arrays de objetos que contienen el número de orden, número de cliente, fecha requerida y fecha de envío de las órdenes entregadas antes de tiempo.
      */
-    @Query("SELECT o.orderNumber, o.customerField.customerNumber, o.requiredDate, o.shippedDate FROM Order o WHERE o.shippedDate < FUNCTION('DATEADD', DAY, 2, o.requiredDate)")
+    @Query("SELECT o.orderNumber, o.customerField.customerNumber, o.requiredDate, o.shippedDate FROM Order o WHERE o.shippedDate < o.requiredDate")
     List<Object[]> findOrdersDeliveredEarly();
 
     /**
