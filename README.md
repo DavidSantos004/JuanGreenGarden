@@ -1,6 +1,6 @@
 # JUAN GREEN GARDEN
 
-![Texto](./readme/web/img_%20(4).png)
+![Texto](/readme/videoDemo.gif)
 
 ## Introduction
 Juan Green Garden is a website where you can make a series of queries to the database through an API developed in Java with Spring Boot.
