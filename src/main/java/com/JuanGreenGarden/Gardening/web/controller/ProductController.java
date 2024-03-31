@@ -97,7 +97,7 @@ public class ProductController {
      * Obtiene los 20 productos más vendidos.
      * @return ResponseEntity con la lista de los 20 productos más vendidos.
      */
-    @GetMapping("/mas-vendidos")
+    @GetMapping("/best-sellers")
     public ResponseEntity<List<Object[]>> getTop20BestSellingProducts() {
         List<Object[]> topProducts = productService.findTop20BestSellingProducts();
         return ResponseEntity.ok(topProducts);

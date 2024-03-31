@@ -100,7 +100,7 @@
                     Queries
                     
                     <span>
-                       Employee
+                       Product
                       
                     </span>
                   </h1>
@@ -160,7 +160,7 @@
   <section class="about_section layout_padding" id="queries">
     <div class="container">
       <h2>
-        EMPLOYEE TABLE QUERIES
+        PRODUCT TABLE QUERIES
       </h2>
       <p>
         Select the query you want to see
@@ -169,7 +169,7 @@
       <div class="table" id="customers_table">
 
       <section class="table__header">
-        <h1>Employee Queries</h1>
+        <h1>Product Queries</h1>
         <div class="input-group">
             <input type="search" placeholder="Search Querie...">
         </div>
@@ -178,53 +178,32 @@
         <table>
             <thead>
                 <tr>
-                    <th> Employee <span class="icon-arrow">&UpArrow;</span></th>
+                    <th> Product <span class="icon-arrow">&UpArrow;</span></th>
                     
                 </tr>
             </thead>
             <tbody>
               <tr>
-                  <td><a href="#consulta1" style="color: black; text-decoration: none;" onclick="consultarTodosLosEmpleados()">Obtain all employees.</a></td>
-              </tr>
-              
-              <tr>
-                  <td><a href="#consulta3" style="color: black; text-decoration: none;" onclick="consultarEmpleadosDeUnJefe()">Obtain employees of boss 7.</a></td>
+                  <td><a href="#consulta1" style="color: black; text-decoration: none;" onclick="consultarTodosLosProductos()">Get all products.</a></td>
               </tr>
               <tr>
-                  <td><a href="#consulta4" style="color: black; text-decoration: none;" onclick="consultarDetallesDelJefe()">Obtain details of the boss.</a></td>
+                  <td><a href="#consulta3" style="color: black; text-decoration: none;" onclick="obtenerProductosOrnamentalesConStockMas100()">Get all products from the "Ornamental" line with stock quantity greater than 100.</a></td>
               </tr>
               <tr>
-                  <td><a href="#consulta5" style="color: black; text-decoration: none;" onclick="consultarEmpleadosNoRepresentantesDeVentas()">Obtain employees who are not sales representatives.</a></td>
+                  <td><a href="#consulta4" style="color: black; text-decoration: none;" onclick="obtenerProductosNoEnOrdenes()">Get products that are not included in orders.</a></td>
               </tr>
               <tr>
-                  <td><a href="#consulta6" style="color: black; text-decoration: none;" onclick="consultarEmpleadosSinOficina()">Obtain a list of employees who do not have an associated office.</a></td>
+                  <td><a href="#consulta5" style="color: black; text-decoration: none;" onclick="obtenerPrecioVentaMasCaraMasBarata()">Get the selling price of the most expensive and cheapest product.</a></td>
               </tr>
               <tr>
-                  <td><a href="#consulta7" style="color: black; text-decoration: none;" onclick="consultarEmpleadosSinClientes()">Obtain a list of employees who do not have associated clients.</a></td>
+                  <td><a href="#consulta6" style="color: black; text-decoration: none;" onclick="obtenerTop20ProductosMasVendidos()">Get the top 20 best-selling products.</a></td>
               </tr>
               <tr>
-                  <td><a href="#consulta8" style="color: black; text-decoration: none;" onclick="consultarEmpleadosSinClientesYConOficina()">Obtain a list of employees who do not have associated clients but have an assigned office.</a></td>
-              </tr>
-              <tr>
-                  <td><a href="#consulta9" style="color: black; text-decoration: none;" onclick="consultarEmpleadosSinOficinaYClientes()">Obtain a list of employees who do not have an associated office nor client.</a></td>
-              </tr>
-              <tr>
-                  <td><a href="#consulta10" style="color: black; text-decoration: none;" onclick="consultarNumeroTotalEmpleados()">Obtain the total number of employees in the company.</a></td>
-              </tr>
-              <tr>
-                  <td><a href="#consulta11" style="color: black; text-decoration: none;" onclick="consultarClientesPorRepresentanteDeVentas()">Retrieve the names of sales representatives and the number of clients each one attends.</a></td>
-              </tr>
-              <tr>
-                  <td><a href="#consulta12" style="color: black; text-decoration: none;" onclick="consultarNombresEmpleadosYJefes()">Obtain the names of employees and their bosses.</a></td>
-              </tr>
-              <tr>
-                  <td><a href="#consulta13" style="color: black; text-decoration: none;" onclick="consultarNombresEmpleadosJefesYJefesSuperiores()">Obtain the names of employees, their bosses, and their higher bosses.</a></td>
-              </tr>
-              <tr>
-                  <td><a href="#consulta14" style="color: black; text-decoration: none;" onclick="consultarEmpleadosSinClientes()">Find employees who do not have associated clients.</a></td>
+                  <td><a href="#consulta7" style="color: black; text-decoration: none;" onclick="encontrarProductosNoEnOrdenesConNombreDescripcionImagen()">Find products that are not present in any order and return their name, description, and image.</a></td>
               </tr>
           </tbody>
-          
+                     
+            
           
             
         </table>
@@ -478,7 +457,7 @@
   <script type="text/javascript" src="/frontend/js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="/frontend/js/bootstrap.js"></script>
   <script src="/frontend/js/tables.js"></script>
-  <script src="/frontend/js/employeeCard.js"></script>
+  <script src="/frontend/js/productCard.js"></script>
 
 
 

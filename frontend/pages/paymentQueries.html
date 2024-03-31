@@ -100,7 +100,7 @@
                     Queries
                     
                     <span>
-                       Employee
+                       Payment
                       
                     </span>
                   </h1>
@@ -160,7 +160,7 @@
   <section class="about_section layout_padding" id="queries">
     <div class="container">
       <h2>
-        EMPLOYEE TABLE QUERIES
+        PAYMENT TABLE QUERIES
       </h2>
       <p>
         Select the query you want to see
@@ -169,7 +169,7 @@
       <div class="table" id="customers_table">
 
       <section class="table__header">
-        <h1>Employee Queries</h1>
+        <h1>Payment Queries</h1>
         <div class="input-group">
             <input type="search" placeholder="Search Querie...">
         </div>
@@ -178,53 +178,43 @@
         <table>
             <thead>
                 <tr>
-                    <th> Employee <span class="icon-arrow">&UpArrow;</span></th>
+                    <th> Payment <span class="icon-arrow">&UpArrow;</span></th>
                     
                 </tr>
             </thead>
             <tbody>
               <tr>
-                  <td><a href="#consulta1" style="color: black; text-decoration: none;" onclick="consultarTodosLosEmpleados()">Obtain all employees.</a></td>
+                  <td><a href="#consulta1" style="color: black; text-decoration: none;" onclick="consultarTodosLosPagos()">Get all payments.</a></td>
               </tr>
-              
+             
               <tr>
-                  <td><a href="#consulta3" style="color: black; text-decoration: none;" onclick="consultarEmpleadosDeUnJefe()">Obtain employees of boss 7.</a></td>
-              </tr>
-              <tr>
-                  <td><a href="#consulta4" style="color: black; text-decoration: none;" onclick="consultarDetallesDelJefe()">Obtain details of the boss.</a></td>
+                  <td><a href="#consulta3" style="color: black; text-decoration: none;" onclick="obtenerNumerosClientesUnicosEn2008()">Get unique customer numbers in 2008.</a></td>
               </tr>
               <tr>
-                  <td><a href="#consulta5" style="color: black; text-decoration: none;" onclick="consultarEmpleadosNoRepresentantesDeVentas()">Obtain employees who are not sales representatives.</a></td>
+                  <td><a href="#consulta4" style="color: black; text-decoration: none;" onclick="obtenerTodosLosPagosEn2008PorPayPal()">Get all payments made in 2008 using the payment method "PayPal".</a></td>
               </tr>
               <tr>
-                  <td><a href="#consulta6" style="color: black; text-decoration: none;" onclick="consultarEmpleadosSinOficina()">Obtain a list of employees who do not have an associated office.</a></td>
+                  <td><a href="#consulta5" style="color: black; text-decoration: none;" onclick="obtenerTodosLosMetodosDePagoDistintos()">Get all distinct payment methods.</a></td>
               </tr>
               <tr>
-                  <td><a href="#consulta7" style="color: black; text-decoration: none;" onclick="consultarEmpleadosSinClientes()">Obtain a list of employees who do not have associated clients.</a></td>
+                  <td><a href="#consulta6" style="color: black; text-decoration: none;" onclick="obtenerPagoMedioParaAnioFijo2009()">Get the average payment for the fixed year 2009.</a></td>
               </tr>
               <tr>
-                  <td><a href="#consulta8" style="color: black; text-decoration: none;" onclick="consultarEmpleadosSinClientesYConOficina()">Obtain a list of employees who do not have associated clients but have an assigned office.</a></td>
+                  <td><a href="#consulta7" style="color: black; text-decoration: none;" onclick="obtenerFechaPrimerYUltimoPagoPorCliente()">Endpoint to get the date of the first and last payment made by each customer.</a></td>
               </tr>
               <tr>
-                  <td><a href="#consulta9" style="color: black; text-decoration: none;" onclick="consultarEmpleadosSinOficinaYClientes()">Obtain a list of employees who do not have an associated office nor client.</a></td>
+                  <td><a href="#consulta8" style="color: black; text-decoration: none;" onclick="obtenerSumaTotalPagosAgrupadosPorAnio()">Get the total sum of payments grouped by year.</a></td>
               </tr>
               <tr>
-                  <td><a href="#consulta10" style="color: black; text-decoration: none;" onclick="consultarNumeroTotalEmpleados()">Obtain the total number of employees in the company.</a></td>
-              </tr>
-              <tr>
-                  <td><a href="#consulta11" style="color: black; text-decoration: none;" onclick="consultarClientesPorRepresentanteDeVentas()">Retrieve the names of sales representatives and the number of clients each one attends.</a></td>
-              </tr>
-              <tr>
-                  <td><a href="#consulta12" style="color: black; text-decoration: none;" onclick="consultarNombresEmpleadosYJefes()">Obtain the names of employees and their bosses.</a></td>
-              </tr>
-              <tr>
-                  <td><a href="#consulta13" style="color: black; text-decoration: none;" onclick="consultarNombresEmpleadosJefesYJefesSuperiores()">Obtain the names of employees, their bosses, and their higher bosses.</a></td>
-              </tr>
-              <tr>
-                  <td><a href="#consulta14" style="color: black; text-decoration: none;" onclick="consultarEmpleadosSinClientes()">Find employees who do not have associated clients.</a></td>
+                  <td><a href="#consulta9" style="color: black; text-decoration: none;" onclick="obtenerNombreClientesConPagosYRepresentantes()">Get the names of customers who have made payments and the name of their representatives along with the city of the representative's office.</a></td>
               </tr>
           </tbody>
           
+            
+            
+            
+            
+            
           
             
         </table>
@@ -478,7 +468,7 @@
   <script type="text/javascript" src="/frontend/js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="/frontend/js/bootstrap.js"></script>
   <script src="/frontend/js/tables.js"></script>
-  <script src="/frontend/js/employeeCard.js"></script>
+  <script src="/frontend/js/paymentCard.js"></script>
 
 
 

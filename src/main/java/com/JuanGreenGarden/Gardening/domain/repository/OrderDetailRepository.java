@@ -50,5 +50,7 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, OrderD
      */
     @Query("SELECT od FROM OrderDetail od WHERE od.priceEach * od.quantityOrdered > 3000")
     List<OrderDetail> findOrderDetailsWithTotalGreaterThan3000();
+
+
 }
 
