@@ -107,12 +107,12 @@ This structure allows for managing offices, employees, customers, products, orde
 
 
 
-# Query
+<!-- # Query
 
 ## Customer
 ### Get all
 - **URL:** http://localhost:8080/customers
-- **Description:** Return a list with the names of all Spanish clients.
+- **Description:** Return a list with the names of all Spanish clients. -->
 
 
 
