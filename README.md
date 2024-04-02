@@ -1,4 +1,4 @@
-# JUAN GREEN GARDEN
+<h2 style="color: #4CAF50; text-align: center; font-size: 24px;">JUAN GREEN GARDEN</h2>
 
 ![Texto](/readme/web/img_%20(4).png)
 
@@ -6,7 +6,8 @@
 
 ![Canva](/readme/web/canva.png)
 
-[<<< Go to Canva >>>](https://www.canva.com/design/DAGBBig-gVM/6NbJrNKyqOj712aN3KMehw/edit?utm_content=DAGBBig-gVM&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+[<button style="background-color:#4CAF50; border:none; color:white; padding:15px 32px; text-align:center; text-decoration:none; display:inline-block; font-size:16px; margin:4px 2px; cursor:pointer; border-radius:10px;">Go to Canva</button>](https://www.canva.com/design/DAGBP0tF2pg/C-4y4MzfNqD2WdaKfr-Yag/view?utm_content=DAGBP0tF2pg&utm_campaign=designshare&utm_medium=link&utm_source=editor)
+
 
 
 
@@ -103,6 +104,9 @@ This structure allows for managing offices, employees, customers, products, orde
 
 ## Model
 
+Dive into the intricate architecture of our database schema, where every table and relationship has been meticulously designed to facilitate efficient data management and retrieval. Gain insights into how various entities interact within our system, empowering you to better understand the inner workings of Juan Green Garden.
+
+
 ![image](/readme/database/Diagrama%20SQL.png)
 
 
@@ -120,25 +124,35 @@ This structure allows for managing offices, employees, customers, products, orde
 
 ## Class Diagram UML
 
-* Controller: 
+Explore the breakdown of our system's components in the Unified Modeling Language (UML) representation:
+
+
+* **Controller**: Navigate the endpoints and actions responsible for handling incoming requests and orchestrating the flow of data.
+
 ![photo](/readme/uml/Controller.png)
 
-* Entity: 
+* **Entity**: Discover the core entities within our system, representing the essential objects and data structures.
+
 ![photo](/readme/uml/Entity.png)
 
-* DTO: 
+* **DTO (Data Transfer Object)**: Delve into the DTOs designed to transfer data between layers of our application, ensuring efficient communication.
+
 ![photo](/readme/uml/DTO.png)
 
-* Exceptions: 
+* **Exceptions**: Understand the exceptional scenarios handled within our system, ensuring robust error management and graceful degradation.
+
 ![photo](/readme/uml/Exceptions.png)
 
-* Repository: 
+* **Repository**: Explore the interfaces and implementations responsible for database interactions, providing seamless data persistence.
+
 ![photo](/readme/uml/Repository.png)
 
-* Security: 
+* **Security**: Examine the security measures implemented to safeguard our application, protecting against unauthorized access and data breaches.
+
 ![photo](/readme/uml/Security.png)
 
-* Service: 
+* **Service**: Uncover the business logic encapsulated within our service layer, orchestrating complex operations and ensuring system functionality.
+
 ![photo](/readme/uml/Service.png)
 
 <!-- * Complete UML:  -->
@@ -148,7 +162,11 @@ This structure allows for managing offices, employees, customers, products, orde
 
 # Frontend
 
+Explore the captivating user interface and functionality of our frontend:
+
 ###  Designs
+
+Dive into the meticulously crafted designs that form the visual identity of our application, blending aesthetics with usability for an immersive user experience.
 
 ![image](/readme/bct/LOGIN.png)
 ![image](/readme/bct/QUERY.png)
@@ -157,9 +175,20 @@ This structure allows for managing offices, employees, customers, products, orde
 
 
 ## Web
+
+Experience the web interface of our application, where intuitive design meets seamless navigation, empowering users to effortlessly interact with our platform from any device or browser.
+
 ![image](/readme/web/img_%20(4).png)
 ![image](/readme/web/img_%20(3).png)
 ![image](/readme/web/img_%20(1).png)
 ![image](/readme/web/img_%20(2).png)
 ![image](/readme/web/img_%20(7).png)
 
+---
+Thank you for visiting our project! We hope you find what we've created at Juan Green Garden helpful and exciting! 
+
+Thank you for your interest and support!
+
+Happy gardening!
+
+---
