@@ -50,14 +50,15 @@
             <div class="d-none d-lg-flex ml-auto flex-column flex-lg-row align-items-center">
               <ul class="navbar-nav  ">
                 <li class="nav-item">
-                  <a class="nav-link" href="/frontend/pages/login.html">
+                  <a id="logout-link" class="nav-link" href="/frontend/pages/login.html">
                     <img src="images/login.png" alt="" />
-                    <span>Sign off</span></a>
+                    <span>Sign off</span>
+                </a>
               </ul>
               <form class="form-inline my-2 mb-3 mb-lg-0 mr-5">
               </form>
             </div>
-
+            
             <div class="custom_menu-btn">
               <button onclick="openNav()">
                 <span class="s-1">
@@ -457,6 +458,15 @@
   <script src="/frontend/js/customerCard.js"></script>
 
 
+  <script>
+    document.getElementById("logout-link").addEventListener("click", function(event) {
+        event.preventDefault(); 
+        
+        sessionStorage.removeItem("jwtToken");
+    
+        window.location.href = this.getAttribute("href");
+    });
+    </script>
 
   <script>
     function openNav() {
